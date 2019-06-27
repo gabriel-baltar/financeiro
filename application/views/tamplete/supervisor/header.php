@@ -32,18 +32,18 @@
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle bg-secondary">Contas</a>
                     <ul class="collapse list-unstyled bg-secondary" id="homeSubmenu">
                         <li>
-                            <a class="bg-secondary" href="<?=base_url('#');?>">>Calendário</a>
+                            <a class="bg-secondary" href="<?=base_url('supervisor/index');?>">Calendário</a>
                         </li>
                         <li>
-                            <a class="bg-secondary"  href="<?=base_url('#');?>">Contas a Pagar</a>
+                            <a class="bg-secondary"  href="<?=base_url('supervisor/contaspagar');?>">Contas a Pagar</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a class="bg-secondary"  href="<?=base_url('#');?>">Lista de Convênios</a>
+                    <a class="bg-secondary"  href="<?=base_url('supervisor/convenio');?>">Lista de Convênios</a>
                 </li>
                 <li>
-                    <a  href="<?=base_url('#');?>" class="dropdown-toggle bg-secondary">Boletos Pagos</a>
+                    <a  href="<?=base_url('supervisor/boletospagos');?>" class="dropdown-toggle bg-secondary">Boletos Pagos</a>
                 </li>
             </ul>
         </nav>
@@ -74,6 +74,8 @@
                     </div>
                 </div>
             </nav>
-            <h1>RS SOLUÇÕES CORPORATIVAS</h1>
+           
         </div>
     </div>
+    
+    </body>

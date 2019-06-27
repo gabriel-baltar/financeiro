@@ -4,43 +4,28 @@
 			Lista de Convênios
 		</h3>
 		<div class="container">
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th scope="col">Número</th>
-						<th scope="col">Nome</th>
-						<th scope="col">Porcentagem</th>
-						<th scope="col">Status</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<th scope="row">1</th>
-						<td>Universidade Veiga de Almeida</td>
-						<td>65%</td>
-						<td>Ativo</td>
-					</tr>
-					<tr>
-						<th scope="row">2</th>
-						<td>Óticas Diniz</td>
-						<td>50%</td>
-						<td>Ativo</td>
-					</tr>
-					<tr>
-						<th scope="row">2</th>
-						<td>Academia Bodytech</td>
-						<td>60%</td>
-						<td>Ativo</td>
-					</tr>
-				</tbody>
-			</table>
+
+			<div class="row m-4">
+				<div class="col">
+					<label for="inputseg">Nome da Empresa</label>
+					<input type="text" class="form-control" placeholder="Nome da Empresa">
+				</div>
+				<div class="col">
+					<label for="inputporcen">Porcentagem</label>
+					<input type="text" class="form-control" placeholder="Porcentagem">
+				</div>
+			</div>
+
+			<div class="row m-4">
+				<div class="col-md-6">
+					<label for="inputstatus">Status</label>
+					<input type="text" class="form-control" placeholder="Status">
+				</div>
+			</div>
+
+			<button type="submit" class="btn btn-primary ml-5 mb-3">Enviar</button>
+			</form>
 		</div>
 	</div>
 </div>
 
-</div>
-</div>
-
-</body>
-
-</html>
