@@ -43,7 +43,7 @@
                     <a class="bg-secondary"  href="<?=base_url('supervisor/convenio');?>">Lista de Convênios</a>
                 </li>
                 <li>
-                    <a  href="<?=base_url('supervisor/boletospagos');?>" class="dropdown-toggle bg-secondary">Boletos Pagos</a>
+                    <a  href="<?=base_url('supervisor/boletospagos');?>" class="bg-secondary">Boletos Pagos</a>
                 </li>
             </ul>
         </nav>
@@ -65,7 +65,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item active">
-                                <a class="nav-link"  href="<?=base_url('#');?>">Olá Administrador</a>
+                                <a class="nav-link">Olá <?=$this->session->userdata('nome');?></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link"  href="<?=base_url('#');?>">Sair</a>
@@ -74,8 +74,3 @@
                     </div>
                 </div>
             </nav>
-           
-        </div>
-    </div>
-    
-    </body>

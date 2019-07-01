@@ -5,20 +5,34 @@ class Diretor extends CI_Controller {
 	
     public function __construct(){
         parent::__construct();
-		$this->load->model('auxiliar_model');
     }	
 
 	public function index()
 	{
-		$dados['title'] = "Diretor | Relatórios";
-		$dados['avaliacao'] = $this->auxiliar_model->listarAvaliacao()->result();
-		$dados['curriculo'] = $this->auxiliar_model->listarCurriculo()->result();
-		$dados['status'] = $this->auxiliar_model->listarStatus()->result();
-		$dados['cargos'] = $this->auxiliar_model->listarCargos()->result();
-		$this->load->view('template/auxiliar/header', $dados);
-		$this->load->view('pages/auxiliar/relatorios', $dados);
-		$this->load->view('template/auxiliar/footer');
+		$this->load->view('tamplete/diretor/header');
+		$this->load->view('pages/diretor/index');
+		$this->load->view('tamplete/diretor/footer');
 	}
 	
-	
+	public function contasPagar()
+	{
+		$this->load->view('tamplete/diretor/header');
+		$this->load->view('pages/diretor/contaspagar');
+		$this->load->view('tamplete/diretor/footer');
+	}
+
+	public function convenio()
+	{
+		$this->load->view('tamplete/diretor/header');
+		$this->load->view('pages/diretor/convenio');
+		$this->load->view('tamplete/diretor/footer');
+		
+	}
+
+	public function boletosPagos()
+	{
+		$this->load->view('tamplete/diretor/header');
+		$this->load->view('pages/diretor/boletospagos');
+		$this->load->view('tamplete/diretor/footer');
+	}
 }

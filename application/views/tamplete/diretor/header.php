@@ -32,18 +32,18 @@
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle bg-secondary">Contas</a>
                     <ul class="collapse list-unstyled bg-secondary" id="homeSubmenu">
                         <li>
-                            <a class="bg-secondary" href="<?=base_url('#');?>">>Calendário</a>
+                            <a class="bg-secondary" href="<?=base_url('diretor/index');?>">Calendário</a>
                         </li>
                         <li>
-                            <a class="bg-secondary"  href="<?=base_url('#');?>">Contas a Pagar</a>
+                            <a class="bg-secondary"  href="<?=base_url('diretor/contaspagar');?>">Contas a Pagar</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a class="bg-secondary"  href="<?=base_url('#');?>">Lista de Convênios</a>
+                    <a class="bg-secondary"  href="<?=base_url('diretor/convenio');?>">Lista de Convênios</a>
                 </li>
                 <li>
-                    <a  href="<?=base_url('#');?>" class="dropdown-toggle bg-secondary">Boletos Pagos</a>
+                    <a  href="<?=base_url('diretor/boletospagos');?>" class="bg-secondary">Boletos Pagos</a>
                 </li>
             </ul>
         </nav>
@@ -65,7 +65,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item active">
-                                <a class="nav-link"  href="<?=base_url('#');?>">Olá Supervisor</a>
+                                <a class="nav-link">Olá <?=$this->session->userdata('nome');?></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link"  href="<?=base_url('#');?>">Sair</a>
@@ -74,6 +74,3 @@
                     </div>
                 </div>
             </nav>
-            <h1>RS SOLUÇÕES CORPORATIVAS</h1>
-        </div>
-    </div>
