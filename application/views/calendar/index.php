@@ -14,8 +14,6 @@
     <script src="<?php echo base_url() ?>scripts/fullcalendar/locale/pt-br"></script>-->
 	<link rel="stylesheet" href="<?php echo base_url() ?>scripts/fullcalendar/fullcalendar.min.css" />
 	<script src="<?php echo base_url() ?>scripts/fullcalendar/lib/moment.min.js"></script>
-	<script src="<?php echo base_url() ?>scripts/fullcalendar/fullcalendar.min.js"></script>
-	<script src="<?php echo base_url() ?>scripts/fullcalendar/gcal.js"></script>
 
 	<!-- Font Awesome JS -->
 	<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
@@ -32,8 +30,8 @@
     <!-- Menu Lateral -->
 	<div class="wrapper bg-light">
 		<nav id="sidebar" class="">
-			<div class="sidebar-header">
-				<h3>RS Soluções</h3>
+			<div class="sidebar">
+				<h2>RS Soluções</h2>
 			</div>
 			<ul class="list-unstyled components">
 				<p>Opções</p>
@@ -102,9 +100,10 @@
 												<input type="text" class="form-control" name="name" value="" required>
 											</div>
 										</div>
+                                           
 										<div class="form-group">
 											<label for="p-in" class="col-md-4 label-heading">Descrição</label>
-											<div class="col-md-8 ui-front">
+											<div class="col-md-6 ui-front">
 												<input type="text" class="form-control" name="description">
 											</div>
 										</div>
@@ -113,24 +112,22 @@
 											<div class="col-md-8">
 												<input type="text" class="form-control" name="start_date">
 											</div>
-										</div>
-										<div class="form-group">
-											<label for="p-in" class="col-md-4 label-heading">Data Final</label>
-											<div class="col-md-8">
-												<input type="text" class="form-control" name="end_date">
 											</div>
-										</div>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default"
-											data-dismiss="modal">Sair</button>
-										<input type="submit" class="btn btn-primary" value="Adicionar Evento">
-										<?php echo form_close() ?>
-									</div>
-								</div>
-							</div>
-                        </div>
-                        
+											<div class="form-group">
+												<label for="p-in" class="col-md-4 label-heading">Data Final</label>
+												<div class="col-md-8">
+													<input placeholder="Data Final" type="text" class="form-control" name="end_date">
+												</div>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">Sair</button>
+												<input type="submit" class="btn btn-primary" value="Adicionar Evento">
+												<?php echo form_close() ?>
+											</div>
+											</div>
+											</div>
+											</div>
+                                    </div>
                         <!-- Modal Editar Evento -->
 						<div class="modal fade" id="editModal" tabindex="-1" role="dialog"
 							aria-labelledby="myModalLabel">
@@ -233,7 +230,11 @@
 						});
 					});
                 </script>
-                
+			
+                <script rel="stylesheet" type="text/javascript" src="<?php echo base_url() ?>scripts/fullcalendar/fullcalendar.js"></script> 
+                <script rel="stylesheet" type="text/javascript" src="<?php echo base_url() ?>scripts/fullcalendar/locale/pt-br.js"></script>
+
+
                 <!-- Função Rolamento do Menu -->
 				<script type="text/javascript">
 					$(document).ready(function () {
@@ -242,6 +243,74 @@
 						});
 					});
 				</script>
-</body>
 
-</html>
+				<script type="text/javascript">
+                	$(function () {
+                		$('#calendar').fullCalendar({
+                	});
+					});
+				</script>
+				
+				<!--Modal Adicionar Evento 
+						<div class="modal fade" id="addModal" tabindex="-1" role="dialog"
+							aria-labelledby="myModalLabel">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close"><span aria-hidden="true">&times;</span></button>
+										<h4 class="modal-title" id="myModalLabel">Adicionar Evento ao Calendário</h4>
+									</div>
+									<div class="modal-body">
+									<?php echo form_open(site_url("calendar/add_event"), array("class" => "form-horizontal")) ?>
+										<div class="form-group col-md-6">
+												<label for="inputseg">Beneficiado</label>
+												<select id="inputseg" class="form-control" required>
+													<option selected>Light</option>
+													<option>Banco</option>
+													<option>Funcionário</option>
+												</select>
+                                             </div>
+											 <div class="form-group">
+												<label for="p-in" class="col-md-4 label-heading">Data de Vencimento</label>
+												<div class="col-md-6">
+													<input placeholder="AAAA-MM-DD HH:MM" type="text" class="form-control" name="start_date" required>
+												</div>
+											</div>
+										<div class="form-group col-md-6">
+												<label for="inputseg">Status</label>
+												<select id="inputseg" class="form-control" required>
+													<option selected>Escolher...</option>
+													<option>Em aberto</option>
+													<option>Vencida</option>
+												</select>
+                                             </div>
+										<div class="form-group">
+											<label for="p-in" class="col-md-4 label-heading">Valor</label>
+											<div class="col-md-6">
+												<input type="text" class="form-control" name="description" required>
+											</div>
+											</div>
+											<div class="form-group col-md-6">
+												<label for="inputseg">Segmento</label>
+												<select id="inputseg" class="form-control">
+													<option selected>Escolher...</option>
+													<option>Acordo Jurídico</option>
+													<option>Imposto</option>
+													<option>Folha</option>
+												</select>
+                                             </div>
+											<div class="form-group">
+											<label for="p-in" class="col-md-4 label-heading">Obsrevações</label>
+											<div class="col-md-6 ui-front">
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" name="end_date" rows="3"></textarea>
+											</div>
+										</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">Sair</button>
+												<input type="submit" class="btn btn-primary" value="Adicionar Evento">
+												<?php echo form_close() ?>
+											</div>
+											</div>
+											</div>
+											</div>-->
