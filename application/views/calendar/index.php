@@ -87,14 +87,16 @@
 										<?php echo form_open(site_url("calendar/add_event"), array("class" => "form-horizontal")) ?>
 										<div class="form-group col-md-6">
 											<label for="id_beneficiario">Beneficiario</label>
-											<select id="id_beneficiario" name="id_beneficiario" class="form-control" required>
+											<select id="id_beneficiario" name="id_beneficiario" class="form-control"
+												required>
 												<?php foreach($beneficiario as $b){; ?>
 												<option value="<?=$b->id;?>"><?=$b->beneficiario;?></option>
 												<?php }; ?>
 											</select>
 										</div>
 										<div class="form-group">
-											<label for="vencimento" class="col-md-4 label-heading">Data de Vencimento</label>
+											<label for="vencimento" class="col-md-4 label-heading">Data de
+												Vencimento</label>
 											<div class="col-md-6">
 												<input placeholder="DD-MM-AAAA" type="text" class="form-control"
 													name="vencimento" id="vencimento" data-mask="00/00/0000" required>
@@ -109,7 +111,7 @@
 											</select>
 										</div>
 										<div class="form-group">
-											<label for="p-in" class="col-md-4 label-heading">Valor</label>
+											<label for="valor" class="col-md-4 label-heading">Valor</label>
 											<div class="col-md-6">
 												<input type="text" class="money form-control" name="valor" id="valor"
 													placeholder="R$ 0.000,00" reverse="true" required>
@@ -118,7 +120,7 @@
 										<div class="form-group col-md-6">
 											<label for="segmento">Segmento</label>
 											<select id="id_segmento" name="id_segmento" class="form-control">
-											<?php foreach($segmento as $m){; ?>
+												<?php foreach($segmento as $m){; ?>
 												<option value="<?=$m->id;?>"><?=$m->segmento;?></option>
 												<?php };?>
 											</select>
@@ -126,14 +128,14 @@
 										<div class="form-group">
 											<label for="p-in" class="col-md-4 label-heading">Obsrevações</label>
 											<div class="col-md-6 ui-front">
-												<textarea class="form-control" id="obs"
-													name="obs" rows="3"></textarea>
+												<textarea class="form-control" id="obs" name="obs" rows="3"></textarea>
 											</div>
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-default"
 												data-dismiss="modal">Sair</button>
-											<input type="submit" class="btn btn-primary" value="Adicionar Evento">
+											<input type="submit" onclick="formataValor('2.500,99')"
+												class="btn btn-primary" value="Adicionar Evento">
 											<?php echo form_close() ?>
 										</div>
 									</div>
@@ -161,20 +163,21 @@
 												<?php }; ?>
 											</select>
 										</div>
+									</div>
+									<div class="form-group">
+										<label for="p-in" class="col-md-4 label-heading">Data de Vencimento</label>
+										<div class="col-md-6">
+											<input type="text" name="vencimento" class="form-control date"
+												id="vencimento" data-mask="00/00/0000" required>
 										</div>
-										<div class="form-group">
-											<label for="p-in" class="col-md-4 label-heading">Data de Vencimento</label>
-											<div class="col-md-6">
-												<input type="text" name="vencimento" class="form-control date" id="vencimento" data-mask="00/00/0000" required>
-											</div>
-										</div>
-										<div class="form-group col-md-6">
-											<label for="id_status">Status</label>
-											<select id="id_status" name="id_status" class="form-control" required>
-												<?php foreach($status as $s){; ?>
-												<option value="<?=$s->id;?>"><?=$s->status;?></option>
-												<?php }; ?>
-											</select>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="id_status">Status</label>
+										<select id="id_status" name="id_status" class="form-control" required>
+											<?php foreach($status as $s){; ?>
+											<option value="<?=$s->id;?>"><?=$s->status;?></option>
+											<?php }; ?>
+										</select>
 										<div class="form-group">
 											<label for="valor" class="col-md-4 label-heading">Valor em R$</label>
 											<div class="col-md-6">
@@ -185,7 +188,7 @@
 										<div class="form-group col-md-6">
 											<label for="id_segmento">Segmento</label>
 											<select id="id_segmento" name="id_segmento" class="form-control">
-											<?php foreach($segmento as $m){; ?>
+												<?php foreach($segmento as $m){; ?>
 												<option value="<?=$m->id;?>"><?=$m->segmento;?></option>
 												<?php };?>
 											</select>
@@ -193,14 +196,13 @@
 										<div class="form-group">
 											<label for="p-in" class="col-md-4 label-heading">Obsrevações</label>
 											<div class="col-md-6 ui-front">
-												<textarea class="form-control" id="obs" name="obs"
-													rows="3"></textarea>
+												<textarea class="form-control" id="obs" name="obs" rows="3"></textarea>
 											</div>
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-default"
 												data-dismiss="modal">Sair</button>
-											<input type="submit" onclick="formataValor(valor.value)" class="btn btn-primary" value="Adicionar Evento">
+											<input type="submit" class="btn btn-primary" value="Adicionar Evento">
 											<?php echo form_close() ?>
 										</div>
 									</div>
@@ -331,13 +333,4 @@
 								selectOnFocus: true
 							});
 						});
-					</script>
-
-					<script>
-						function formataValor(val){
-							var valorSemVirgula = val.replace(".","");
-							var valorFinal = valor.replace(",",".");
-							console.log(valorFinal);
-							return valorFinal;
-						}
 					</script>

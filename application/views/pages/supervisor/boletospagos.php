@@ -7,17 +7,18 @@
 			<div class="row m-4">
 				<div class="col">
 					<label for="inputfavorecido">Favorecido</label>
-					<input type="text" class="form-control" placeholder="Favorecido">
+					<input type="text" class="form-control" placeholder="Favorecido" required>
 				</div>
 				<div class="col">
 					<label for="inputdate">Data de Emissão</label>
-					<input type="text" class="form-control" placeholder="Data de Emissão">
+					<input type="text" class="form-control date" placeholder="DD-MM-AAAA" data-mask="00/00/0000"
+						required>
 				</div>
 			</div>
 			<div class="row m-4">
 				<div class="col">
 					<label for="inputseg">Data de Vencimento</label>
-					<input type="text" class="form-control" placeholder="Data de Vencimento">
+					<input type="text" class="form-control" placeholder="DD-MM-AAAA" data-mask="00/00/0000" required>
 				</div>
 				<div class="col">
 					<label for="inputstatus">Código de Barra</label>
@@ -27,8 +28,8 @@
 
 			<div class="row m-4">
 				<div class="col-md-3">
-					<label for="inputseg">Valor a Pagar</label>
-					<input type="text" class="form-control" placeholder=" R$ 000, 00">
+					<label for="valor">Valor a Pagar</label>
+					<input type="text" class="form-control money" placeholder="R$ 0.000,00" reverse="true" required>
 				</div>
 			</div>
 			<button type="submit" class="btn btn-primary ml-5 mb-3">Enviar</button>
@@ -37,6 +38,3 @@
 	</div>
 </div>
 </div>
-</div>
-
-</html>

@@ -21,6 +21,13 @@ class Calendar extends CI_Controller
      /*Função Listar Eventos*/
      public function get_events()
           {
+               $id_segmento = $this->input->post("id_segmento", TRUE);
+               $id_status = $this->input->post("id_status", TRUE);
+               $id_beneficiario = $this->input->post("id_beneficiario", TRUE);
+               $valor = $this->input->post("valor", TRUE);
+               $vencimento = $this->input->post("vencimento", TRUE);
+               $obs = $this->input->post("obs", TRUE);
+
                // Our Start and End Dates
                $start = $this->input->get("start");
                $end = $this->input->get("end");
@@ -45,6 +52,7 @@ class Calendar extends CI_Controller
                          "description" => $r->description,
                          "end" => $r->end,
                          "start" => $r->start
+
                     );
                }
 
@@ -85,14 +93,14 @@ class Calendar extends CI_Controller
        "id_segmento" => $id_segmento,
        "id_status" => $id_status,
        "id_beneficiario" => $id_beneficiario,
-       "valor" => $valor,
+       "valor" => str_replace(",",".",str_replace(".","",$valor)),
        "vencimento" => $vencimento,
        "obs" => $obs
        )
     );
 
-	echo $this->db->last_query(); //Use para verificar a última consulta executada
-     exit();    
+	//echo $this->db->last_query(); //Use para verificar a última consulta executada
+     //exit();    
 
     redirect(site_url("calendar"));
 }
