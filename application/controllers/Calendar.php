@@ -11,12 +11,14 @@ class Calendar extends CI_Controller
     }
 
      public function index()
-     {
-          $this->load->view("calendar/index.php", array());
+     {    
+          $dados['segmento'] = $this->calendar_model->get_segmento()->result();
+          $dados['status'] = $this->calendar_model->get_status()->result();
+          $dados['beneficiario'] = $this->calendar_model->get_beneficiario()->result();
+          $this->load->view("calendar/index.php", $dados);
      }
 
-     /*Função Adicionar Evento*/
-
+     /*Função Listar Eventos*/
      public function get_events()
           {
                // Our Start and End Dates
@@ -49,14 +51,17 @@ class Calendar extends CI_Controller
                echo json_encode(array("events" => $data_events));
                exit();
           }
+
      /*Função Adicionar Evento*/
      public function add_event() 
 {
     /* Our calendar data */
-    $name = $this->input->post("name", TRUE);
-    $desc = $this->input->post("description", TRUE);
-    $start_date = $this->input->post("start_date", TRUE);
-    $end_date = $this->input->post("end_date", TRUE);
+    $id_segmento = $this->input->post("id_segmento", TRUE);
+    $id_status = $this->input->post("id_status", TRUE);
+    $id_beneficiario = $this->input->post("id_beneficiario", TRUE);
+    $valor = $this->input->post("valor", TRUE);
+    $vencimento = $this->input->post("vencimento", TRUE);
+    $obs = $this->input->post("obs", TRUE);
 
     if(!empty($start_date)) {
        $sd = DateTime::createFromFormat("Y/m/d H:i", $start_date);
@@ -77,12 +82,17 @@ class Calendar extends CI_Controller
     }
 
     $this->calendar_model->add_event(array(
-       "title" => $name,
-       "description" => $desc,
-       "start" => $start_date,
-       "end" => $end_date
+       "id_segmento" => $id_segmento,
+       "id_status" => $id_status,
+       "id_beneficiario" => $id_beneficiario,
+       "valor" => $valor,
+       "vencimento" => $vencimento,
+       "obs" => $obs
        )
     );
+
+	echo $this->db->last_query(); //Use para verificar a última consulta executada
+     exit();    
 
     redirect(site_url("calendar"));
 }

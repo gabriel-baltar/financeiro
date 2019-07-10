@@ -33,17 +33,8 @@
 
 			<ul class="list-unstyled components">
 				<p>Opções</p>
-				<li class="active">
-					<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"
-						class="dropdown-toggle ">Contas</a>
-					<ul class="collapse list-unstyled " id="homeSubmenu">
-						<li>
-							<a class="" href="<?=base_url('diretor/index');?>">Calendário</a>
-						</li>
-						<li>
-							<a class="" href="<?=base_url('diretor/contaspagar');?>">Contas a Pagar</a>
-						</li>
-					</ul>
+				<li>
+					<a class="" href="<?=base_url('calendar/index');?>">Calendário</a>
 				</li>
 				<li>
 					<a class="" href="<?=base_url('diretor/convenio');?>">Lista de Convênios</a>

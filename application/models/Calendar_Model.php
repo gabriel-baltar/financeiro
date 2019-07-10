@@ -11,7 +11,7 @@ class Calendar_Model extends CI_Model
     
     public function add_event($data)
     {
-        $this->db->insert("calendar_events", $data);
+        $this->db->insert("tbl_gasto", $data);
     }
     
     public function get_event($id)
@@ -27,6 +27,23 @@ class Calendar_Model extends CI_Model
     public function delete_event($id)
     {
         $this->db->where("ID", $id)->delete("calendar_events");
+    }
+
+    public function get_beneficiario(){
+
+        return $this->db->get('tbl_beneficiario');
+    }
+
+    public function get_status(){
+
+        return $this->db->get('tbl_status');
+
+    }
+
+    public function get_segmento(){
+
+        return $this->db->get('tbl_segmento');
+
     }
 
 
