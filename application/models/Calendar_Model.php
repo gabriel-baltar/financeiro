@@ -5,7 +5,7 @@ class Calendar_Model extends CI_Model
 
     public function get_events($start, $end)
     {
-        return $this->db->where("start >=", $start)->where("end <=", $end)->get("calendar_events");
+        return $this->db->where("start >=", $start)->where("end <=", $end)->get("tbl_gasto");
 
     }
     
@@ -16,17 +16,17 @@ class Calendar_Model extends CI_Model
     
     public function get_event($id)
     {
-        return $this->db->where("ID", $id)->get("calendar_events");
+        return $this->db->where("id", $id)->get("tbl_gasto");
     }
     
     public function update_event($id, $data)
     {
-        $this->db->where("ID", $id)->update("calendar_events", $data);
+        $this->db->where("ID", $id)->update("tbl_gasto", $data);
     }
     
     public function delete_event($id)
     {
-        $this->db->where("ID", $id)->delete("calendar_events");
+        $this->db->where("ID", $id)->delete("tbl_gasto");
     }
 
     public function get_beneficiario(){
@@ -36,7 +36,7 @@ class Calendar_Model extends CI_Model
 
     public function get_status(){
 
-        return $this->db->get('tbl_status');
+        return $this->db->get('tbl_status'); 
 
     }
 

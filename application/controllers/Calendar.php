@@ -21,13 +21,6 @@ class Calendar extends CI_Controller
      /*Função Listar Eventos*/
      public function get_events()
           {
-               $id_segmento = $this->input->post("id_segmento", TRUE);
-               $id_status = $this->input->post("id_status", TRUE);
-               $id_beneficiario = $this->input->post("id_beneficiario", TRUE);
-               $valor = $this->input->post("valor", TRUE);
-               $vencimento = $this->input->post("vencimento", TRUE);
-               $obs = $this->input->post("obs", TRUE);
-
                // Our Start and End Dates
                $start = $this->input->get("start");
                $end = $this->input->get("end");
@@ -47,9 +40,10 @@ class Calendar extends CI_Controller
                foreach($events->result() as $r) {
 
                     $data_events[] = array(
-                         "id" => $r->ID,
-                         "title" => $r->title,
-                         "description" => $r->description,
+                         "id" => $r->id,
+                         "valor" => $r->valor,
+                         "vencimento" => $r->vencimento,
+                         "obs" => $r->obs,
                          "end" => $r->end,
                          "start" => $r->start
 
@@ -62,55 +56,57 @@ class Calendar extends CI_Controller
 
      /*Função Adicionar Evento*/
      public function add_event() 
-{
-    /* Our calendar data */
-    $id_segmento = $this->input->post("id_segmento", TRUE);
-    $id_status = $this->input->post("id_status", TRUE);
-    $id_beneficiario = $this->input->post("id_beneficiario", TRUE);
-    $valor = $this->input->post("valor", TRUE);
-    $vencimento = $this->input->post("vencimento", TRUE);
-    $obs = $this->input->post("obs", TRUE);
+          {
+          /* Our calendar data */
+          $id_segmento = $this->input->post("add_id_segmento", TRUE);
+          $id_status = $this->input->post("add_id_status", TRUE);
+          $id_beneficiario = $this->input->post("add_id_beneficiario", TRUE);
+          $valor = $this->input->post("add_valor", TRUE);
+          $vencimento = $this->input->post("add_vencimento", TRUE);
+          $obs = $this->input->post("add_obs", TRUE);
 
-    if(!empty($start_date)) {
-       $sd = DateTime::createFromFormat("Y/m/d H:i", $start_date);
-       $start_date = $sd->format('Y-m-d H:i:s');
-       $start_date_timestamp = $sd->getTimestamp();
-    } else {
-       $start_date = date("Y-m-d H:i:s", time());
-       $start_date_timestamp = time();
-    }
+          if(!empty($start_date)) {
+               $sd = DateTime::createFromFormat("Y/m/d H:i", $start_date);
+               $start_date = $sd->format('Y-m-d H:i:s');
+               $start_date_timestamp = $sd->getTimestamp();
+          } else {
+               $start_date = date("Y-m-d H:i:s", time());
+               $start_date_timestamp = time();
+          }
 
-    if(!empty($end_date)) {
-       $ed = DateTime::createFromFormat("Y/m/d H:i", $end_date);
-       $end_date = $ed->format('Y-m-d H:i:s');
-       $end_date_timestamp = $ed->getTimestamp();
-    } else {
-       $end_date = date("Y-m-d H:i:s", time());
-       $end_date_timestamp = time();
-    }
+          if(!empty($end_date)) {
+               $ed = DateTime::createFromFormat("Y/m/d H:i", $end_date);
+               $end_date = $ed->format('Y-m-d H:i:s');
+               $end_date_timestamp = $ed->getTimestamp();
+          } else {
+               $end_date = date("Y-m-d H:i:s", time());
+               $end_date_timestamp = time();
+          }
 
-    $this->calendar_model->add_event(array(
-       "id_segmento" => $id_segmento,
-       "id_status" => $id_status,
-       "id_beneficiario" => $id_beneficiario,
-       "valor" => str_replace(",",".",str_replace(".","",$valor)),
-       "vencimento" => $vencimento,
-       "obs" => $obs
-       )
-    );
+          $this->calendar_model->add_event(array(
+               "id_segmento" => $id_segmento,
+               "id_status" => $id_status,
+               "id_beneficiario" => $id_beneficiario,
+               "valor" => str_replace(",",".",str_replace(".","",$valor)),
+               "vencimento" => $vencimento,
+               "obs" => $obs
+               )
+          );
 
-	//echo $this->db->last_query(); //Use para verificar a última consulta executada
-     //exit();    
+               //echo $this->db->last_query(); //Use para verificar a última consulta executada
+               //exit();    
 
-    redirect(site_url("calendar"));
-}
+          redirect(site_url("calendar"));
+          }
 
      /*Funcão Editar Evento*/ 
      
      public function edit_event()
      {
-          $eventid = intval($this->input->post("eventid"));
-          $event = $this->calendar_model->get_event($eventid);
+          $id = intval($this->input->post("id"));
+          $event = $this->calendar_model->get_event($id);
+          //echo $this->db->last_query(); //Use para verificar a última consulta executada
+          //exit();           
           if($event->num_rows() == 0) {
                echo"Invalid Event";
                exit();
@@ -119,11 +115,15 @@ class Calendar extends CI_Controller
           $event->row();
 
           /* Our calendar data */
-          $name = $this->input->post("name");
-          $desc = $this->input->post("description");
-          $start_date = $this->input->post("start_date");
-          $end_date = $this->input->post("end_date");
-          $delete = $this->input->post("delete");
+          $id_segmento = $this->input->post("id_segmento", TRUE);
+          $id_status = $this->input->post("id_status", TRUE);
+          $id_beneficiario = $this->input->post("id_beneficiario", TRUE);
+          $valor = $this->input->post("valor", TRUE);
+          $vencimento = $this->input->post("vencimento", TRUE);
+          $obs = $this->input->post("obs", TRUE);
+          $start_date = "";
+          $end_date = "";
+          $delete = intval($this->input->post("delete"));
 
           if(!$delete) {
 
@@ -145,16 +145,18 @@ class Calendar extends CI_Controller
                     $end_date_timestamp = time();
                }
 
-               $this->calendar_model->update_event($eventid, array(
-                    "title" => $name,
-                    "description" => $desc,
-                    "start" => $start_date,
-                    "end" => $end_date,
+               $this->calendar_model->update_event($id, array(
+                    "id_segmento" => $id_segmento,
+                    "id_status" => $id_status,
+                    "id_beneficiario" => $id_beneficiario,
+                    "valor" => str_replace(",",".",str_replace(".","",$valor)),
+                    "vencimento" => $vencimento,
+                    "obs" => $obs
                     )
-               );
+                 );
 
           } else {
-               $this->calendar_model->delete_event($eventid);
+               $this->calendar_model->delete_event($id);
           }
 
           redirect(site_url("calendar"));
