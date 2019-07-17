@@ -107,8 +107,9 @@
 										}
 									}, ],
 									dayClick: function (date, jsEvent, view) {
-										date_last_clicked = $(this);
-										//$(this).css('background-color', '#bed7f3');
+										document.getElementById("add_data").value = date.format('YYYY-MM-DD HH:MM:SS');
+										//var dt = document.getElementById("add_data").value;
+										//console.log(dt);
 										$('#addModal').modal();
 									},
 									eventClick: function (event, jsEvent, view) {
@@ -123,6 +124,7 @@
 								});
 							});
 						</script>
+
 						<!-- Função Rolamento do Menu -->
 						<script type="text/javascript">
 							$(document).ready(function () {
@@ -188,6 +190,11 @@
 							});
 
 							document.querySelector("#delete").addEventListener("click", function(){
-								console.log(document.querySelector("#delete").checked);
+								if(document.querySelector("#delete").checked){
+									document.getElementById("btn").value = "Deletar Registro";	
+								}else{
+									document.getElementById("btn").value = "Atualizar Registro";
+
+								}
 							})
 						</script>

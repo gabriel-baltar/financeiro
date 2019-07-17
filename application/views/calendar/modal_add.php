@@ -59,11 +59,12 @@
 										<div class="modal-footer">
 											<button type="button" class="btn btn-default"
 												data-dismiss="modal">Sair</button>
-											<input type="submit" onclick="formataValor('2.500,99')"
-												class="btn btn-primary" value="Adicionar Evento">
+											<input type="submit" class="btn btn-primary" value="Adicionar Evento">
+											<input type="hidden" id="add_data" name="add_data">
 											<?php echo form_close() ?>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
+

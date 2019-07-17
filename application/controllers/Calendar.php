@@ -64,6 +64,8 @@ class Calendar extends CI_Controller
           $valor = $this->input->post("add_valor", TRUE);
           $vencimento = $this->input->post("add_vencimento", TRUE);
           $obs = $this->input->post("add_obs", TRUE);
+          $start = $this->input->post("add_data", TRUE);
+          $end = $this->input->post("add_data", TRUE);
 
           if(!empty($start_date)) {
                $sd = DateTime::createFromFormat("Y/m/d H:i", $start_date);
@@ -89,7 +91,9 @@ class Calendar extends CI_Controller
                "id_beneficiario" => $id_beneficiario,
                "valor" => str_replace(",",".",str_replace(".","",$valor)),
                "vencimento" => $vencimento,
-               "obs" => $obs
+               "obs" => $obs,
+               "start" => $start,
+               "end" => $end
                )
           );
 
@@ -123,6 +127,8 @@ class Calendar extends CI_Controller
           $obs = $this->input->post("obs", TRUE);
           $start_date = "";
           $end_date = "";
+          $start = $this->input->post("add_data");
+          $end = $this->input->post("add_data");
           $delete = intval($this->input->post("delete"));
 
           if(!$delete) {
@@ -151,7 +157,9 @@ class Calendar extends CI_Controller
                     "id_beneficiario" => $id_beneficiario,
                     "valor" => str_replace(",",".",str_replace(".","",$valor)),
                     "vencimento" => $vencimento,
-                    "obs" => $obs
+                    "obs" => $obs,
+                    "start" => $start,
+                    "end" => $end
                     )
                  );
 

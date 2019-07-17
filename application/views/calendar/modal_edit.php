@@ -67,7 +67,7 @@
 										<div class="modal-footer">
 											<button type="button" class="btn btn-default"
 												data-dismiss="modal">Sair</button>
-											<input type="submit" id="btn" class="btn btn-primary" value="Editar Evento">
+											<input type="submit" id="btn" class="btn btn-primary">
 											<input type="hidden" name="id" id="id" value="0" />
 											<?php echo form_close() ?>
 										</div>
