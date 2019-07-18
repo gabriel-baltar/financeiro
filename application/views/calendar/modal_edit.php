@@ -60,7 +60,7 @@
 										<div class="form-group">
 												<label for="p-in" class="col-md-4 label-heading">Deletar Evento</label>
 												<div class="col-md-8">
-													<input type="checkbox" id="delete" name="delete">
+													<input type="checkbox" id="delete" name="delete" value="1">
 												</div>
                                         </div>
                                         									
@@ -69,6 +69,7 @@
 												data-dismiss="modal">Sair</button>
 											<input type="submit" id="btn" class="btn btn-primary">
 											<input type="hidden" name="id" id="id" value="0" />
+											<input type="hidden" id="edit_data" name="edit_data">
 											<?php echo form_close() ?>
 										</div>
 									</div>

@@ -10,7 +10,7 @@ class Supervisor extends CI_Controller {
 	public function index()
 	{
 		$this->load->view('tamplete/supervisor/header');
-		$this->load->view('pages/supervisor/index');
+		$this->load->view('pages/supervisor/boletospagos');
 		$this->load->view('tamplete/supervisor/footer');
 	}
 

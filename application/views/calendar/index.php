@@ -27,12 +27,12 @@
 
 <body>
 	<!-- Menu Lateral -->
-	<div class="wrapper bg-light">
+	<div class="wrapper">
 		<nav id="sidebar" class="">
 			<div class="sidebar">
 				<h2>RS Soluções</h2>
 			</div>
-			<ul class="list-unstyled components">
+			<ul class="list-unstyled">
 				<p>Opções</p>
 				<li>
 					<a class="" href="<?=base_url('calendar/index');?>">Calendário</a>
@@ -118,9 +118,10 @@
 										$('#obs').val(event.obs);
 										$('#id').val(event.id);
 										$('#editModal').modal();
-										console.log(event);
+										document.getElementById("edit_data").value = event.start._i;
+										//console.log(event.start._i);										
 									},
-									eventLimit: true									
+									eventLimit: true								
 								});
 							});
 						</script>

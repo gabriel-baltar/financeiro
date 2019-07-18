@@ -31,7 +31,7 @@
 				<h3>RS Soluções</h3>
 			</div>
 
-			<ul class="list-unstyled components">
+			<ul class="list-unstyled">
 				<p>Opções</p>
 				<li>
 					<a class="" href="<?=base_url('calendar/index');?>">Calendário</a>

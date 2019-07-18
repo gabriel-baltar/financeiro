@@ -21,12 +21,12 @@ class Calendar_Model extends CI_Model
     
     public function update_event($id, $data)
     {
-        $this->db->where("ID", $id)->update("tbl_gasto", $data);
+        $this->db->where("id", $id)->update("tbl_gasto", $data);
     }
     
     public function delete_event($id)
     {
-        $this->db->where("ID", $id)->delete("tbl_gasto");
+        $this->db->where("id", $id)->delete("tbl_gasto");
     }
 
     public function get_beneficiario(){
@@ -46,6 +46,12 @@ class Calendar_Model extends CI_Model
 
     }
 
+    public function tbl_segmento($id){
+
+        $result = $this->db->join($tbl_segmento, $id_segmento);
+        return $result;
+
+    }
 
 }
 

@@ -108,9 +108,7 @@ class Calendar extends CI_Controller
      public function edit_event()
      {
           $id = intval($this->input->post("id"));
-          $event = $this->calendar_model->get_event($id);
-          //echo $this->db->last_query(); //Use para verificar a última consulta executada
-          //exit();           
+          $event = $this->calendar_model->get_event($id);          
           if($event->num_rows() == 0) {
                echo"Invalid Event";
                exit();
@@ -127,8 +125,8 @@ class Calendar extends CI_Controller
           $obs = $this->input->post("obs", TRUE);
           $start_date = "";
           $end_date = "";
-          $start = $this->input->post("add_data");
-          $end = $this->input->post("add_data");
+          $start = $this->input->post("edit_data");
+          $end = $this->input->post("edit_data");
           $delete = intval($this->input->post("delete"));
 
           if(!$delete) {
@@ -155,7 +153,7 @@ class Calendar extends CI_Controller
                     "id_segmento" => $id_segmento,
                     "id_status" => $id_status,
                     "id_beneficiario" => $id_beneficiario,
-                    "valor" => str_replace(",",".",str_replace(".","",$valor)),
+                    "valor" => $valor,
                     "vencimento" => $vencimento,
                     "obs" => $obs,
                     "start" => $start,
@@ -166,7 +164,8 @@ class Calendar extends CI_Controller
           } else {
                $this->calendar_model->delete_event($id);
           }
-
+          //echo $this->db->last_query(); //Use para verificar a última consulta executada
+          //exit(); 
           redirect(site_url("calendar"));
      }
 }
