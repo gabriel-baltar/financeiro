@@ -38,7 +38,7 @@ class Supervisor extends CI_Controller {
 
 	public function boletos_a_vencer()
 	{
-		$dados['boletos'] = $this->calendar_model->get_boletos_pagos()->result();
+		$dados['boletos'] = $this->calendar_model->get_boletos_a_vencer()->result();
 		$this->load->view('tamplete/supervisor/header');
 		$this->load->view('pages/supervisor/boletos_a_vencer', $dados);
 		$this->load->view('tamplete/supervisor/footer');
@@ -46,7 +46,7 @@ class Supervisor extends CI_Controller {
 
 	public function boletos_Vencidos()
 	{
-		$dados['boletos'] = $this->calendar_model->get_boletos_pagos()->result();
+		$dados['boletos'] = $this->calendar_model->get_boletos_vencidos()->result();
 		$this->load->view('tamplete/supervisor/header');
 		$this->load->view('pages/supervisor/boletos_vencidos', $dados);
 		$this->load->view('tamplete/supervisor/footer');
