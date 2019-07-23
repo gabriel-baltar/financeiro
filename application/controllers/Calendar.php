@@ -6,7 +6,7 @@ class Calendar extends CI_Controller
 {
 
      public function __construct() {
-        Parent::__construct();
+        parent::__construct();
         $this->load->model("calendar_model");
     }
 
@@ -15,6 +15,9 @@ class Calendar extends CI_Controller
           $dados['segmento'] = $this->calendar_model->get_segmento()->result();
           $dados['status'] = $this->calendar_model->get_status()->result();
           $dados['beneficiario'] = $this->calendar_model->get_beneficiario()->result();
+          $dados['boletos'] = $this->calendar_model->get_boletos_pagos()->result();
+          //echo $this->db->last_query(); //Use para verificar a última consulta executada
+          //exit(); 
           $this->load->view("calendar/index.php", $dados);
      }
 
@@ -42,10 +45,14 @@ class Calendar extends CI_Controller
                     $data_events[] = array(
                          "id" => $r->id,
                          "valor" => $r->valor,
-                         "vencimento" => $r->vencimento,
+                         "codigo_de_barras" => $r->codigo_de_barras,
                          "obs" => $r->obs,
                          "end" => $r->end,
-                         "start" => $r->start
+                         "start" => "$r->start",
+                         "title" => $r->segmento,
+                         "id_segmento" => $r->id_segmento,
+                         "id_status" => $r->id_status,
+                         "id_beneficiario" => $r->id_beneficiario
 
                     );
                }
@@ -62,7 +69,7 @@ class Calendar extends CI_Controller
           $id_status = $this->input->post("add_id_status", TRUE);
           $id_beneficiario = $this->input->post("add_id_beneficiario", TRUE);
           $valor = $this->input->post("add_valor", TRUE);
-          $vencimento = $this->input->post("add_vencimento", TRUE);
+          $codigo_de_barras = $this->input->post("add_codigo", TRUE);
           $obs = $this->input->post("add_obs", TRUE);
           $start = $this->input->post("add_data", TRUE);
           $end = $this->input->post("add_data", TRUE);
@@ -90,7 +97,7 @@ class Calendar extends CI_Controller
                "id_status" => $id_status,
                "id_beneficiario" => $id_beneficiario,
                "valor" => str_replace(",",".",str_replace(".","",$valor)),
-               "vencimento" => $vencimento,
+               "codigo_de_barras" => $codigo_de_barras,
                "obs" => $obs,
                "start" => $start,
                "end" => $end
@@ -121,7 +128,7 @@ class Calendar extends CI_Controller
           $id_status = $this->input->post("id_status", TRUE);
           $id_beneficiario = $this->input->post("id_beneficiario", TRUE);
           $valor = $this->input->post("valor", TRUE);
-          $vencimento = $this->input->post("vencimento", TRUE);
+          $codigo_de_barras = $this->input->post("codigo", TRUE);
           $obs = $this->input->post("obs", TRUE);
           $start_date = "";
           $end_date = "";
@@ -154,7 +161,7 @@ class Calendar extends CI_Controller
                     "id_status" => $id_status,
                     "id_beneficiario" => $id_beneficiario,
                     "valor" => $valor,
-                    "vencimento" => $vencimento,
+                    "codigo_de_barras" => $codigo_de_barras,
                     "obs" => $obs,
                     "start" => $start,
                     "end" => $end

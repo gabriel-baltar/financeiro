@@ -42,6 +42,12 @@
 				<li>
 					<a href="<?=base_url('diretor/boletospagos');?>" class="">Boletos Pagos</a>
 				</li>
+				<li>
+					<a href="<?=base_url('diretor/boletos_a_vencer');?>" class="">Boletos a Vencer</a>
+				</li>
+				<li>
+					<a href="<?=base_url('diretor/boletos_vencidos');?>" class="">Boletos Vencidos</a>
+				</li>
 			</ul>
 		</nav>
 

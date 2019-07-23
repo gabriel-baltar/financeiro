@@ -28,3 +28,37 @@
 		</div>
 	</div>
 </div>
+
+<div class="container mt-5">
+	<div class="card">
+
+		<div class="container">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th scope="col">Nome da Empresa</th>
+						<th scope="col">Porcentagem do Desconto</th>
+						<th scope="col">Status</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>Acadêmia</th>
+						<td>50%</td>
+						<td>Ativo</td>
+					</tr>
+					<tr>
+						<th>Faculdade</th>
+						<td>60%</td>
+						<td>Ativo</td>
+					</tr>
+					<tr>
+						<th>Loja</th>
+						<td>40%</td>
+						<td>Cancelado</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

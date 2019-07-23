@@ -5,7 +5,13 @@ class Calendar_Model extends CI_Model
 
     public function get_events($start, $end)
     {
-        return $this->db->where("start >=", $start)->where("end <=", $end)->get("tbl_gasto");
+        //return $this->db->where("start >=", $start)->where("end <=", $end)->get("tbl_gasto");
+        $this->db->select('tbl_gasto.id, tbl_gasto.codigo_de_barras, tbl_gasto.valor, tbl_gasto.id_segmento, tbl_gasto.id_status, tbl_gasto.id_beneficiario, tbl_gasto.vencimento, tbl_gasto.obs, tbl_gasto.start, tbl_gasto.end, segmento');
+        $this->db->from('tbl_gasto');
+        $this->db->join('tbl_segmento', 'tbl_segmento.id = tbl_gasto.id_segmento');
+        $this->db->where("tbl_gasto.start >=", $start)->where("tbl_gasto.end <=", $end);
+        $query = $this->db->get();
+        return $query;
 
     }
     
@@ -46,10 +52,45 @@ class Calendar_Model extends CI_Model
 
     }
 
-    public function tbl_segmento($id){
+    public function get_boletos_pagos()
+    {
+        //return $this->db->where("start >=", $start)->where("end <=", $end)->get("tbl_gasto");
+        $this->db->select('tbl_segmento.segmento, tbl_beneficiario.beneficiario, tbl_status.status, tbl_gasto.valor, tbl_gasto.codigo_de_barras');
+        $this->db->from('tbl_gasto');
+        $this->db->join('tbl_beneficiario', 'tbl_beneficiario.id = tbl_gasto.id_beneficiario');
+        $this->db->join('tbl_status', 'tbl_status.id = tbl_gasto.id_status');
+        $this->db->join('tbl_segmento', 'tbl_segmento.id = tbl_gasto.id_segmento');
+        $this->db->where("tbl_gasto.id_status =", "1");
+        $query = $this->db->get();
+        return $query;
 
-        $result = $this->db->join($tbl_segmento, $id_segmento);
-        return $result;
+    }
+
+    public function get_boletos_a_vencer()
+    {
+        //return $this->db->where("start >=", $start)->where("end <=", $end)->get("tbl_gasto");
+        $this->db->select('tbl_segmento.segmento, tbl_beneficiario.beneficiario, tbl_status.status, tbl_gasto.valor, tbl_gasto.codigo_de_barras');
+        $this->db->from('tbl_gasto');
+        $this->db->join('tbl_beneficiario', 'tbl_beneficiario.id = tbl_gasto.id_beneficiario');
+        $this->db->join('tbl_status', 'tbl_status.id = tbl_gasto.id_status');
+        $this->db->join('tbl_segmento', 'tbl_segmento.id = tbl_gasto.id_segmento');
+        $this->db->where("tbl_gasto.id_status =", "2");
+        $query = $this->db->get();
+        return $query;
+
+    }
+
+    public function get_boletos_vencidos()
+    {
+        //return $this->db->where("start >=", $start)->where("end <=", $end)->get("tbl_gasto");
+        $this->db->select('tbl_segmento.segmento, tbl_beneficiario.beneficiario, tbl_status.status, tbl_gasto.valor, tbl_gasto.codigo_de_barras');
+        $this->db->from('tbl_gasto');
+        $this->db->join('tbl_beneficiario', 'tbl_beneficiario.id = tbl_gasto.id_beneficiario');
+        $this->db->join('tbl_status', 'tbl_status.id = tbl_gasto.id_status');
+        $this->db->join('tbl_segmento', 'tbl_segmento.id = tbl_gasto.id_segmento');
+        $this->db->where("tbl_gasto.id_status =", "3");
+        $query = $this->db->get();
+        return $query;
 
     }
 

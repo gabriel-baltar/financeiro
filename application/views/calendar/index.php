@@ -43,6 +43,12 @@
 				<li>
 					<a href="<?=base_url('supervisor/boletospagos');?>" class="">Boletos Pagos</a>
 				</li>
+				<li>
+					<a href="<?=base_url('supervisor/boletos_a_vencer');?>" class="">Boletos a Vencer</a>
+				</li>
+				<li>
+					<a href="<?=base_url('supervisor/boletos_vencidos');?>" class="">Boletos Vencidos</a>
+				</li>
 			</ul>
 		</nav>
 
@@ -114,12 +120,15 @@
 									},
 									eventClick: function (event, jsEvent, view) {
 										$('#valor').val(event.valor);
-										$('#vencimento').val(event.vencimento);
+										$('#codigo').val(event.codigo_de_barras);
 										$('#obs').val(event.obs);
 										$('#id').val(event.id);
+										document.getElementById("id_beneficiario").value = event.id_beneficiario;
+										document.getElementById("id_status").value = event.id_status;
+										document.getElementById("id_segmento").value = event.id_segmento;
+										document.getElementById("edit_data").value = event.start._i;										
 										$('#editModal').modal();
-										document.getElementById("edit_data").value = event.start._i;
-										//console.log(event.start._i);										
+										console.log(event);										
 									},
 									eventLimit: true								
 								});
@@ -137,59 +146,6 @@
 					
 
 						<script type="text/javascript">
-							$(document).ready(function () {
-								$('.date').mask('00/00/0000');
-								$('.time').mask('00:00:00');
-								$('.date_time').mask('00/00/0000 00:00:00');
-								$('.cep').mask('00000-000');
-								$('.phone').mask('0000-0000');
-								$('.phone_with_ddd').mask('(00) 0000-0000');
-								$('.phone_us').mask('(000) 000-0000');
-								$('.mixed').mask('AAA 000-S0S');
-								$('.cpf').mask('000.000.000-00', {
-									reverse: true
-								});
-								$('.cnpj').mask('00.000.000/0000-00', {
-									reverse: true
-								});
-								$('.money').mask('000.000.000.000.000,00', {
-									reverse: true
-								});
-								$('.money2').mask("#.##0,00", {
-									reverse: true
-								});
-								$('.ip_address').mask('0ZZ.0ZZ.0ZZ.0ZZ', {
-									translation: {
-										'Z': {
-											pattern: /[0-9]/,
-											optional: true
-										}
-									}
-								});
-								$('.ip_address').mask('089.089.089.089');
-								$('.percent').mask('##0,00%', {
-									reverse: true
-								});
-								$('.clear-if-not-match').mask("00/00/0000", {
-									clearIfNotMatch: true
-								});
-								$('.placeholder').mask("00/00/0000", {
-									placeholder: "__/__/____"
-								});
-								$('.fallback').mask("00r00r0000", {
-									translation: {
-										'r': {
-											pattern: /[\/]/,
-											fallback: '/'
-										},
-										placeholder: "__/__/____"
-									}
-								});
-								$('.selectonfocus').mask("00/00/0000", {
-									selectOnFocus: true
-								});
-							});
-
 							document.querySelector("#delete").addEventListener("click", function(){
 								if(document.querySelector("#delete").checked){
 									document.getElementById("btn").value = "Deletar Registro";	

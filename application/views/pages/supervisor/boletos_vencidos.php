@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="card">
 		<h3 class="card-header text-dark bg-light">
-			Boletos Pagos
+			Boletos Vencidos
 		</h3>
 		<div class="container">
 			<div class="row m-4">

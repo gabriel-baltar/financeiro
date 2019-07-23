@@ -11,7 +11,7 @@
 									<div class="modal-body">
 										<?php echo form_open(site_url("calendar/edit_event"), array("class" => "form-horizontal")) ?>
 										<div class="form-group col-md-6">
-											<label for="id_beneficiario">Beneficiario</label>
+											<label for="id_beneficiario">Beneficiário</label>
 											<select id="id_beneficiario" name="id_beneficiario" class="form-control"
 												required>
 												<?php foreach($beneficiario as $b){; ?>
@@ -20,27 +20,14 @@
 											</select>
 										</div>
 										<div class="form-group">
-											<label for="vencimento" class="col-md-4 label-heading">Data de
-												Vencimento</label>
-											<div class="col-md-6">
-												<input placeholder="DD-MM-AAAA" type="text" class="form-control"
-													name="vencimento" id="vencimento" data-mask="00/00/0000" required>
-											</div>
-										</div>
-										<div class="form-group col-md-6">
-											<label for="status">Status</label>
+										<div class="col-md-6">
+										<label for="status">Status</label>
 											<select id="id_status" name="id_status" class="form-control" required>
 												<?php foreach($status as $s){; ?>
 												<option value="<?=$s->id;?>"><?=$s->status;?></option>
 												<?php }; ?>
 											</select>
 										</div>
-										<div class="form-group">
-											<label for="valor" class="col-md-4 label-heading">Valor</label>
-											<div class="col-md-6">
-												<input type="text" class="money form-control" name="valor" id="valor"
-													placeholder="R$ 0.000,00" reverse="true" required>
-											</div>
 										</div>
 										<div class="form-group col-md-6">
 											<label for="segmento">Segmento</label>
@@ -51,8 +38,23 @@
 											</select>
 										</div>
 										<div class="form-group">
+											<label for="valor" class="col-md-4 label-heading">Valor</label>
+											<div class="col-md-6">
+												<input type="text" class="money form-control" name="valor" id="valor"
+													placeholder="R$ 0.000,00" reverse="true" required>
+											</div>
+										</div>
+										<div class="form-group">
+										<div class="col-md-12">
+										<label for="codigo" class="col-md-4 label-heading">Código de Barras</label>
+											<div class="col-md-12">
+												<input type="text" class="form-control" name="codigo" id="codigo">
+											</div>
+										</div>
+										</div>
+										<div class="form-group">
 											<label for="p-in" class="col-md-4 label-heading">Obsrevações</label>
-											<div class="col-md-6 ui-front">
+											<div class="col-md-12 ui-front">
 												<textarea class="form-control" id="obs" name="obs" rows="3"></textarea>
 											</div>
                                         </div>
