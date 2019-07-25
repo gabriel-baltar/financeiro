@@ -34,7 +34,7 @@
 			<ul class="list-unstyled">
 				<p>Opções</p>
 				<li>
-					<a class="" href="<?=base_url('calendar/index');?>">Calendário</a>
+					<a class="" href="<?=base_url('supervisor/index');?>">Calendário</a>
 				</li>
 				<li>
 					<a class="" href="<?=base_url('supervisor/convenio');?>">Lista de Convênios</a>

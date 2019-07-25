@@ -10,7 +10,7 @@
 									</div>
 									<fieldset disabled>
 									<div class="modal-body">
-										<?php echo form_open(site_url("calendar/edit_event"), array("class" => "form-horizontal")) ?>
+										<?php echo form_open(site_url("diretor/edit_event"), array("class" => "form-horizontal")) ?>
 										<div class="form-group col-md-6">
 											<label for="id_beneficiario">Beneficiário</label>
 											<select id="id_beneficiario" name="id_beneficiario" class="form-control"
@@ -74,6 +74,27 @@
 											<input type="hidden" name="id" id="id" value="0" />
 											<input type="hidden" id="edit_data" name="edit_data">
 											<?php echo form_close() ?>
+										</div>
+										<hr>
+										<div class="table">
+										<table class="table table-hover">
+													<thead>
+														<tr>
+															<th scope="col">Total do Dia</th>
+															<th scope="col">Débito em aberto  (Mês)</th>
+															<th scope="col">Total do Mês</th>
+														</tr>
+													</thead>
+													<tbody>
+														<?php foreach($boletos as $b){; ?>
+														<tr>
+															<th><?=$b->beneficiario;?></th>
+															<td><?=$b->status;?></td>
+															<td><?=$b->segmento;?></td>
+														</tr>
+														<?php };?>
+													</tbody>
+												</table>
 										</div>
 									</div>
 								</div>

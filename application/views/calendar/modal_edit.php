@@ -8,7 +8,7 @@
 										<h4 class="modal-title" id="myModalLabel">Editar Evento</h4>
 									</div>
 									<div class="modal-body">
-										<?php echo form_open(site_url("calendar/edit_event"), array("class" => "form-horizontal")) ?>
+										<?php echo form_open(site_url("supervisor/edit_event"), array("class" => "form-horizontal")) ?>
 										<div class="form-group col-md-6">
 											<label for="id_beneficiario">Beneficiário</label>
 											<select id="id_beneficiario" name="id_beneficiario" class="form-control" required>
@@ -81,13 +81,11 @@
 														</tr>
 													</thead>
 													<tbody>
-														<?php foreach($boletos as $b){; ?>
 														<tr>
-															<th><?=$b->beneficiario;?></th>
-															<td><?=$b->status;?></td>
-															<td><?=$b->segmento;?></td>
+															<td><?=$debitosMes['0']->valor;?></td>
+															<td><?=$debitosMes['0']->valor;?></td>
+															<td><?=$debitosMes['0']->valor;?></td>
 														</tr>
-														<?php };?>
 													</tbody>
 												</table>
 										</div>

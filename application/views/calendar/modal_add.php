@@ -9,7 +9,7 @@
 										<h4 class="modal-title" id="myModalLabel">Adicionar Evento ao Calendário</h4>
 									</div>
 									<div class="modal-body">
-										<?php echo form_open(site_url("calendar/add_event"), array("class" => "form-horizontal")) ?>
+										<?php echo form_open(site_url("supervisor/add_event"), array("class" => "form-horizontal")) ?>
 										<div class="form-group col-md-6">
 											<label for="add_id_beneficiario">Beneficiário</label>
 											<select id="add_id_beneficiario" name="add_id_beneficiario" class="form-control"

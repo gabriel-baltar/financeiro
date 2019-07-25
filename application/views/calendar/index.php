@@ -35,7 +35,7 @@
 			<ul class="list-unstyled">
 				<p>Opções</p>
 				<li>
-					<a class="" href="<?=base_url('calendar/index');?>">Calendário</a>
+					<a class="" href="<?=base_url('supervisor/index');?>">Calendário</a>
 				</li>
 				<li>
 					<a class="" href="<?=base_url('supervisor/convenio');?>">Lista de Convênios</a>
@@ -98,7 +98,7 @@
 									eventSources: [{
 										events: function (start, end, timezone, callback) {
 											$.ajax({
-												url: '<?php echo base_url() ?>calendar/get_events',
+												url: '<?php echo base_url() ?>supervisor/get_events',
 												dataType: 'json',
 												data: {
 													// our hypothetical feed requires UNIX timestamps
