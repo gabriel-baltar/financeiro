@@ -72,22 +72,22 @@
 										</div>
 										<hr>
 										<div class="table">
-										<table class="table table-hover">
-													<thead>
-														<tr>
-															<th scope="col">Total do Dia</th>
-															<th scope="col">Débito em aberto  (Mês)</th>
-															<th scope="col">Total do Mês</th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr>
-															<td><?=$debitosMes['0']->valor;?></td>
-															<td><?=$debitosMes['0']->valor;?></td>
-															<td><?=$debitosMes['0']->valor;?></td>
-														</tr>
-													</tbody>
-												</table>
+											<table class="table table-hover">
+												<thead>
+													<tr>
+														<th scope="col">Total do Dia</th>
+														<th scope="col">Débito em aberto (Mês)</th>
+														<th scope="col">Total do Mês</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td><span id="totalPagoDia"></span></td>
+														<td><?=$debitosMes['0']->valor;?></td>
+														<td>tota mes</td>
+													</tr>
+												</tbody>
+											</table>
 										</div>
 									</div>
 								</div>

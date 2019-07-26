@@ -16,9 +16,10 @@ class Supervisor extends CI_Controller {
           $dados['beneficiario'] = $this->Supervisor_model->get_beneficiario()->result();
           $dados['boletos'] = $this->Supervisor_model->get_boletos_pagos()->result();
           $dados['debitosMes'] = $this->Supervisor_model->boletosAvencerMes()->result();
+          //$dados['totalPagoDia'] = $this->Supervisor_model->totalPagoDia()->result();
           //echo $this->db->last_query(); //Use para verificar a última consulta executada
           //exit(); 
-          $this->load->view("calendar/index.php", $dados);
+          $this->load->view("calendar/index.php", $dados); 
      }
 
 	public function convenio()
@@ -75,12 +76,12 @@ class Supervisor extends CI_Controller {
                $end_format = $enddt->format('Y-m-d H:i:s');
 
                $events = $this->Supervisor_model->get_events($start_format, $end_format);
-
+               $totalPagoDia = $this->Supervisor_model->totalPagoDia();
                $data_events = array();
 
                foreach($events->result() as $r) {
-
-                    $data_events[] = array(
+                    
+                        $data_events[] = array(
                          "id" => $r->id,
                          "valor" => $r->valor,
                          "codigo_de_barras" => $r->codigo_de_barras,
@@ -90,8 +91,15 @@ class Supervisor extends CI_Controller {
                          "title" => $r->segmento,
                          "id_segmento" => $r->id_segmento,
                          "id_status" => $r->id_status,
-                         "id_beneficiario" => $r->id_beneficiario
+                         "id_beneficiario" => $r->id_beneficiario,
+                         "totalPagoDia" => ""
 
+                    );
+               }
+
+               foreach($totalPagoDia->result() as $t) {
+                    $data_events[] = array(
+                         "totalPagoDia" => $t->totalPagoDia
                     );
                }
 

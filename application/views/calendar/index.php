@@ -49,6 +49,12 @@
 				<li>
 					<a href="<?=base_url('supervisor/boletos_vencidos');?>" class="">Boletos Vencidos</a>
 				</li>
+				<li>
+					<a href="<?=base_url('#');?>" class="">Contas a Receber</a>
+				</li>
+				<li>
+					<a href="<?=base_url('#');?>" class="">Relatórios</a>
+				</li>
 			</ul>
 		</nav>
 
@@ -77,15 +83,18 @@
 					</nav>
 
 					<div id="calendar">
-					<!--Modais-->
-					<?php echo require('modal_add.php');?> 
-					<?php echo require('modal_edit.php');?>					
-					<!--Modais-->
+						<!--Modais-->
+						<?php echo require('modal_add.php');?>
+						<?php echo require('modal_edit.php');?>
+						<!--Modais-->
 
 						<!--Calendario Brasileiro-->
-						<script rel="stylesheet" type="text/javascript" src="<?php echo base_url() ?>scripts/fullcalendar/fullcalendar.js"></script>
-						<script rel="stylesheet" type="text/javascript" src="<?php echo base_url() ?>scripts/fullcalendar/locale/pt-br.js"></script>
-						<script rel="stylesheet" type="text/javascript" src="<?php echo base_url() ?>vendor/js/jquery.mask.js"></script>
+						<script rel="stylesheet" type="text/javascript"
+							src="<?php echo base_url() ?>scripts/fullcalendar/fullcalendar.js"></script>
+						<script rel="stylesheet" type="text/javascript"
+							src="<?php echo base_url() ?>scripts/fullcalendar/locale/pt-br.js"></script>
+						<script rel="stylesheet" type="text/javascript"
+							src="<?php echo base_url() ?>vendor/js/jquery.mask.js"></script>
 
 
 						<!-- Função do Calendário -->
@@ -126,11 +135,12 @@
 										document.getElementById("id_beneficiario").value = event.id_beneficiario;
 										document.getElementById("id_status").value = event.id_status;
 										document.getElementById("id_segmento").value = event.id_segmento;
-										document.getElementById("edit_data").value = event.start._i;										
+										document.getElementById("edit_data").value = event.start._i;
+										document.getElementById("totalPagoDia").innerHTML = event.totalPagoDia;
 										$('#editModal').modal();
-										console.log(event);										
+										console.log(event);
 									},
-									eventLimit: true								
+									eventLimit: true
 								});
 							});
 						</script>
@@ -142,14 +152,14 @@
 									$('#sidebar').toggleClass('active');
 								});
 							});
-						</script>					
-					
+						</script>
+
 
 						<script type="text/javascript">
-							document.querySelector("#delete").addEventListener("click", function(){
-								if(document.querySelector("#delete").checked){
-									document.getElementById("btn").value = "Deletar Registro";	
-								}else{
+							document.querySelector("#delete").addEventListener("click", function () {
+								if (document.querySelector("#delete").checked) {
+									document.getElementById("btn").value = "Deletar Registro";
+								} else {
 									document.getElementById("btn").value = "Atualizar Registro";
 
 								}

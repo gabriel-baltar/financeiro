@@ -48,6 +48,12 @@
 				<li>
 					<a href="<?=base_url('supervisor/boletos_vencidos');?>" class="">Boletos Vencidos</a>
 				</li>
+				<li>
+					<a href="<?=base_url('supervisor/boletos_vencidos');?>" class="">Contas a Pagar</a>
+				</li>
+				<li>
+					<a href="<?=base_url('supervisor/boletos_vencidos');?>" class="">Relatórios</a>
+				</li>
 			</ul>
 		</nav>
 

@@ -20,7 +20,7 @@ class Supervisor_model extends CI_Model{
         $this->db->join('tbl_segmento', 'tbl_segmento.id = tbl_gasto.id_segmento');
         $this->db->where("tbl_gasto.start >=", $start)->where("tbl_gasto.end <=", $end);
         $query = $this->db->get();
-        return $query;
+        return $query;       
 
     }
     
@@ -104,11 +104,16 @@ class Supervisor_model extends CI_Model{
     }
 
     public function boletosAvencerMes(){
-        $query = $this->db->select('SUM(valor) as valor FROM tbl_gasto WHERE id_status = "2" AND start < LAST_DAY(now())');
+        $query = $this->db->select("SUM(valor) AS valor FROM tbl_gasto WHERE MONTH(start) = MONTH(NOW()) AND id_status = '2'", FALSE);
         $query = $this->db->get();
         return $query;
     }
 
+    public function totalPagoDia(){
+        $query = $this->db->select("SUM(valor), CASE id_status WHEN '1' THEN SUM(valor) ELSE '0' END AS 'totalPagoDia', start FROM tbl_gasto GROUP BY start", FALSE);
+        $query = $this->db->get();
+        return $query;
+    }
 	
 }
 

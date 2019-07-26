@@ -48,6 +48,14 @@
 				<li>
 					<a href="<?=base_url('diretor/boletos_vencidos');?>" class="">Boletos Vencidos</a>
 				</li>
+				<li>
+					<a href="<?=base_url('diretor/boletos_vencidos');?>" class="">Contas a Receber</a>
+				</li>
+			</ul>
+			<li>
+					<a href="<?=base_url('diretor/boletos_vencidos');?>" class="">Relatórios</a>
+				</li>
+			</ul>
 			</ul>
 		</nav>
 
