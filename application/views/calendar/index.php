@@ -1,3 +1,4 @@
+<?= print_r($totalPagoDia);?>
 <!DOCTYPE html>
 <html lang="pt-br">
 

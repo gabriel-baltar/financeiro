@@ -16,7 +16,7 @@ class Supervisor extends CI_Controller {
           $dados['beneficiario'] = $this->Supervisor_model->get_beneficiario()->result();
           $dados['boletos'] = $this->Supervisor_model->get_boletos_pagos()->result();
           $dados['debitosMes'] = $this->Supervisor_model->boletosAvencerMes()->result();
-          //$dados['totalPagoDia'] = $this->Supervisor_model->totalPagoDia()->result();
+          $dados['totalPagoDia'] = $this->Supervisor_model->totalPagoDia()->result();
           //echo $this->db->last_query(); //Use para verificar a última consulta executada
           //exit(); 
           $this->load->view("calendar/index.php", $dados); 
@@ -78,9 +78,21 @@ class Supervisor extends CI_Controller {
                $events = $this->Supervisor_model->get_events($start_format, $end_format);
                $totalPagoDia = $this->Supervisor_model->totalPagoDia();
                $data_events = array();
+               $total = array();
+               $juncao = array();
 
-               foreach($events->result() as $r) {
-                    
+
+              $eventos = $events->result();
+              $totais = $totalPagoDia->result();
+
+              foreach($totais as $t){
+                    $data_events[] = array(
+                         "totalPagoDia" => $t->totalPagoDia
+                    );
+               }      
+
+               foreach($eventos as $index => $r){
+
                         $data_events[] = array(
                          "id" => $r->id,
                          "valor" => $r->valor,
@@ -91,19 +103,15 @@ class Supervisor extends CI_Controller {
                          "title" => $r->segmento,
                          "id_segmento" => $r->id_segmento,
                          "id_status" => $r->id_status,
-                         "id_beneficiario" => $r->id_beneficiario,
-                         "totalPagoDia" => ""
-
+                         "id_beneficiario" => $r->id_beneficiario                   
                     );
                }
+ 
+               $juncao = array_merge($total, $data_events);              
+               echo json_encode(array(
+                    "events" => $data_events
+               ));
 
-               foreach($totalPagoDia->result() as $t) {
-                    $data_events[] = array(
-                         "totalPagoDia" => $t->totalPagoDia
-                    );
-               }
-
-               echo json_encode(array("events" => $data_events));
                exit();
           }
 

@@ -23,6 +23,12 @@ class Supervisor_model extends CI_Model{
         return $query;       
 
     }
+
+    public function totalPagoDia(){
+        $query = $this->db->select("SUM(valor), CASE id_status WHEN '1' THEN SUM(valor) ELSE '0' END AS 'totalPagoDia', start FROM tbl_gasto GROUP BY start", FALSE);
+        $query = $this->db->get();
+        return $query;
+    }    
     
     public function add_event($data)
     {
@@ -105,12 +111,6 @@ class Supervisor_model extends CI_Model{
 
     public function boletosAvencerMes(){
         $query = $this->db->select("SUM(valor) AS valor FROM tbl_gasto WHERE MONTH(start) = MONTH(NOW()) AND id_status = '2'", FALSE);
-        $query = $this->db->get();
-        return $query;
-    }
-
-    public function totalPagoDia(){
-        $query = $this->db->select("SUM(valor), CASE id_status WHEN '1' THEN SUM(valor) ELSE '0' END AS 'totalPagoDia', start FROM tbl_gasto GROUP BY start", FALSE);
         $query = $this->db->get();
         return $query;
     }
