@@ -20,7 +20,7 @@ class Supervisor_model extends CI_Model{
         $this->db->join('tbl_segmento', 'tbl_segmento.id = tbl_gasto.id_segmento');
         $this->db->where("tbl_gasto.start >=", $start)->where("tbl_gasto.end <=", $end);
         $query = $this->db->get();
-        return $query;       
+        return $query;      
 
     }
 
