@@ -1,4 +1,3 @@
-<?= print_r($totalPagoDia);?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -37,6 +36,9 @@
 				<p>Opções</p>
 				<li>
 					<a class="" href="<?=base_url('supervisor/index');?>">Calendário</a>
+				</li>
+				<li>
+					<a class="" href="<?=base_url('#');?>">Dashboard</a>
 				</li>
 				<li>
 					<a class="" href="<?=base_url('supervisor/convenio');?>">Lista de Convênios</a>
@@ -137,7 +139,6 @@
 										document.getElementById("id_status").value = event.id_status;
 										document.getElementById("id_segmento").value = event.id_segmento;
 										document.getElementById("edit_data").value = event.start._i;
-										document.getElementById("totalPagoDia").innerHTML = event.totalPagoDia;
 										$('#editModal').modal();
 										console.log(event);
 									},

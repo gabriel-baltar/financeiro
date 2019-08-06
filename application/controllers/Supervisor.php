@@ -83,28 +83,27 @@ class Supervisor extends CI_Controller {
               $totais = $totalPagoDia->result();
             
                
-               for($i = 0; $i < sizeof($eventos); $i++){ 
-                    $data_events[] = array(
-                         "id" => $eventos[$i]->id,
-                         "valor" => $eventos[$i]->valor,
-                         "codigo_de_barras" => $eventos[$i]->codigo_de_barras,
-                         "obs" => $eventos[$i]->obs,
-                         "end" => $eventos[$i]->end,
-                         "start" => $eventos[$i]->start,
-                         "title" => $eventos[$i]->segmento,
-                         "id_segmento" => $eventos[$i]->id_segmento,
-                         "id_status" => $eventos[$i]->id_status,
-                         "id_beneficiario" => $eventos[$i]->id_beneficiario,
-                         "totalPagoDia" => $totais[]->totalPagoDia
-                    );     
-               }
-                            
-               echo json_encode(array(
-                    "events" => $data_events
-               ));              
+              foreach($events->result() as $r) {
 
-               exit();
+               $data_events[] = array(
+                    "id" => $r->id,
+                    "valor" => $r->valor,
+                    "codigo_de_barras" => $r->codigo_de_barras,
+                    "obs" => $r->obs,
+                    "end" => $r->end,
+                    "start" => "$r->start",
+                    "title" => $r->segmento,
+                    "id_segmento" => $r->id_segmento,
+                    "id_status" => $r->id_status,
+                    "id_beneficiario" => $r->id_beneficiario
+
+               );
           }
+
+          echo json_encode(array("events" => $data_events));
+          exit();
+     }
+
 
      /*Função Adicionar Evento*/
      public function add_event() 

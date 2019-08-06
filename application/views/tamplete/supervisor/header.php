@@ -37,7 +37,10 @@
 					<a class="" href="<?=base_url('supervisor/index');?>">Calendário</a>
 				</li>
 				<li>
-					<a class="" href="<?=base_url('supervisor/convenio');?>">Lista de Convênios</a>
+					<a class="" href="<?=base_url('#');?>">Dashboard</a>
+				</li>
+				<li>
+					<a class="" href="<?=base_url('#');?>">Lista de Convênios</a>
 				</li>
 				<li>
 					<a href="<?=base_url('supervisor/boletospagos');?>" class="">Boletos Pagos</a>
@@ -49,10 +52,10 @@
 					<a href="<?=base_url('supervisor/boletos_vencidos');?>" class="">Boletos Vencidos</a>
 				</li>
 				<li>
-					<a href="<?=base_url('supervisor/boletos_vencidos');?>" class="">Contas a Pagar</a>
+					<a href="<?=base_url('#');?>" class="">Contas a Receber</a>
 				</li>
 				<li>
-					<a href="<?=base_url('supervisor/boletos_vencidos');?>" class="">Relatórios</a>
+					<a href="<?=base_url('#');?>" class="">Relatórios</a>
 				</li>
 			</ul>
 		</nav>

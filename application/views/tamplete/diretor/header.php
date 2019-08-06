@@ -37,6 +37,9 @@
 					<a class="" href="<?=base_url('diretor/index');?>">Calendário</a>
 				</li>
 				<li>
+					<a class="" href="<?=base_url('diretor/index');?>">Dashboard</a>
+				</li>
+				<li>
 					<a class="" href="<?=base_url('diretor/convenio');?>">Lista de Convênios</a>
 				</li>
 				<li>
@@ -51,11 +54,9 @@
 				<li>
 					<a href="<?=base_url('diretor/boletos_vencidos');?>" class="">Contas a Receber</a>
 				</li>
-			</ul>
-			<li>
+				<li>
 					<a href="<?=base_url('diretor/boletos_vencidos');?>" class="">Relatórios</a>
 				</li>
-			</ul>
 			</ul>
 		</nav>
 
