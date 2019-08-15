@@ -23,9 +23,12 @@ class Supervisor extends CI_Controller {
      }
 
 	public function convenio()
-	{
+	{    
+          $query['convenio'] = $this->Supervisor_model->listarBeneficios()->result();
+          $query['servicos'] = $this->Supervisor_model->listarServicos()->result();
+          $query['nome'] = $this->Supervisor_model->listarEmpresas()->result();
 		$this->load->view('tamplete/supervisor/header');
-		$this->load->view('pages/supervisor/convenio');
+		$this->load->view('pages/supervisor/convenio', $query);
 		$this->load->view('tamplete/supervisor/footer');
 	}
 
@@ -58,7 +61,152 @@ class Supervisor extends CI_Controller {
 		$this->load->view('tamplete/supervisor/header');
 		$this->load->view('pages/supervisor/boletos_vencidos', $dados);
 		$this->load->view('tamplete/supervisor/footer');
-	}
+     }
+
+     public function dashboard()
+	{
+          $dados['contasAPagarSemana'] = $this->Supervisor_model->contasAPagarSemana()->result();
+          $data = [];
+          foreach($dados['contasAPagarSemana'] as $row){
+               $data['dia'][] = $row->dia;
+               $data['totalSemana'][] = $row->totalSemana;
+          }
+
+          $dados['contasAPagarMes'] = $this->Supervisor_model->contasAPagarMes()->result();
+          $mes = [];
+          foreach($dados['contasAPagarMes'] as $row){
+               $mes['mes'][] = $row->mes;
+               $mes['totalMes'][] = $row->totalMes;
+          }
+
+          $data['chart_data'] = json_encode($data);
+          $data['chart_mes'] = json_encode($mes);
+		$this->load->view('tamplete/supervisor/header');
+		$this->load->view('pages/supervisor/dashboard', $data);
+		$this->load->view('tamplete/supervisor/footer');
+     }
+
+     public function contasAPagarMes()
+	{
+          $dados['contasAPagarMes'] = $this->Supervisor_model->contasAPagarMes()->result();
+          $data = [];
+          foreach($dados['contasAPagarMes'] as $row){
+               $data['mes'][] = $row->mes;
+               $data['totalMes'][] = $row->totalMes;
+          }
+          $data['chart_data'] = json_encode($data);
+		$this->load->view('tamplete/supervisor/header');
+		$this->load->view('pages/supervisor/dashboard', $data);
+		$this->load->view('tamplete/supervisor/footer');
+     }
+
+     public function adicionarEmpresa()
+	{
+          $tb_empresa['empresa'] = $this->input->post('inputname');
+          $tb_empresa['telefone'] = $this->input->post('inputphone');
+          $tb_empresa['duracao_contrato'] = $this->input->post('inputcontract');
+          $tb_empresa['email'] = $this->input->post('inputemail');
+          $tb_empresa['responsavel'] = $this->input->post('inputresponsavel');
+          if($this->db->insert('tb_empresa', $tb_empresa)){
+               $this->session->set_flashdata('msg-sucesso', "Empresa adicionada com sucesso.");
+               redirect(base_url('supervisor/convenio'));
+          }else{
+               $this->session->set_flashdata('msg-erro', "Ocorreu alguma falha.");
+               redirect(base_url('supervisor/convenio'));
+          }
+
+     }    
+
+     public function adicionarServico()
+     {
+          $tb_servicos['tipo'] = $this->input->post('inputservice');
+          if($this->db->insert('tb_servicos', $tb_servicos)){
+               $this->session->set_flashdata('msg-sucesso', "Serviço adicionado com sucesso.");
+               redirect(base_url('supervisor/convenio'));
+          }else{
+               $this->session->set_flashdata('msg-erro', "Tente novamente");
+               redirect(base_url('supervisor/convenio'));
+          }
+     }
+
+     public function adicionarConvenio()
+     {
+          $tb_convenio['id_empresa'] = $this->input->post('name');
+          $tb_convenio['id_servicos'] = $this->input->post('service');
+          $tb_convenio['porcentagem'] = $this->input->post('porcentagem');
+          $tb_convenio['obs'] = $this->input->post('obs');
+          if($this->db->insert('tb_convenio', $tb_convenio)){
+               $this->session->set_flashdata('msg-sucesso', "Convenio adicionado com sucesso.");
+               redirect(base_url('supervisor/convenio'));
+          }else{
+               $this->session->set_flashdata('msg-erro', "Tente novamente");
+               redirect(base_url('supervisor/convenio'));
+          };
+     }
+
+     public function contas_a_pagar_semana() {
+   
+          $query =  $this->db->query("SELECT COUNT(id) as count,MONTHNAME(created_at) as month_name FROM users WHERE YEAR(created_at) = '" . date('Y') . "'
+          GROUP BY YEAR(created_at),MONTH(created_at)"); 
+     
+          $record = $query->result();
+          $data = [];
+     
+          foreach($record as $row) {
+                $data['label'][] = $row->month_name;
+                $data['data'][] = (int) $row->count;
+          }
+          $data['chart_data'] = json_encode($data);
+          $this->load->view('bar_chart',$data);
+        }
+
+        public function contas_a_pagar_mes() {
+   
+          $query =  $this->db->query("SELECT COUNT(id) as count,MONTHNAME(created_at) as month_name FROM users WHERE YEAR(created_at) = '" . date('Y') . "'
+          GROUP BY YEAR(created_at),MONTH(created_at)"); 
+     
+          $record = $query->result();
+          $data = [];
+     
+          foreach($record as $row) {
+                $data['label'][] = $row->month_name;
+                $data['data'][] = (int) $row->count;
+          }
+          $data['chart_data'] = json_encode($data);
+          $this->load->view('bar_chart',$data);
+        }
+
+        public function contas_receber_semana() {
+   
+          $query =  $this->db->query("SELECT COUNT(id) as count,MONTHNAME(created_at) as month_name FROM users WHERE YEAR(created_at) = '" . date('Y') . "'
+          GROUP BY YEAR(created_at),MONTH(created_at)"); 
+     
+          $record = $query->result();
+          $data = [];
+     
+          foreach($record as $row) {
+                $data['label'][] = $row->month_name;
+                $data['data'][] = (int) $row->count;
+          }
+          $data['chart_data'] = json_encode($data);
+          $this->load->view('bar_chart',$data);
+        }
+
+        public function contas_receber_mes() {
+   
+          $query =  $this->db->query("SELECT COUNT(id) as count,MONTHNAME(created_at) as month_name FROM users WHERE YEAR(created_at) = '" . date('Y') . "'
+          GROUP BY YEAR(created_at),MONTH(created_at)"); 
+     
+          $record = $query->result();
+          $data = [];
+     
+          foreach($record as $row) {
+                $data['label'][] = $row->month_name;
+                $data['data'][] = (int) $row->count;
+          }
+          $data['chart_data'] = json_encode($data);
+          $this->load->view('bar_chart',$data);
+        }
 
      /*Função Listar Eventos*/
      public function get_events()

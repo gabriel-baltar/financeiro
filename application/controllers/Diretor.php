@@ -57,7 +57,78 @@ class Diretor extends CI_Controller {
 		$this->load->view('tamplete/diretor/header');
 		$this->load->view('pages/diretor/boletos_vencidos', $dados);
 		$this->load->view('tamplete/diretor/footer');
-	}
+     }
+     
+     public function dashboard()
+	{
+		$this->load->view('tamplete/diretor/header');
+		$this->load->view('pages/diretor/dashboard');
+		$this->load->view('tamplete/diretor/footer');
+     }
+     
+     public function contas_a_pagar_semana() {
+   
+          $query =  $this->db->query("SELECT COUNT(id) as count,MONTHNAME(created_at) as month_name FROM users WHERE YEAR(created_at) = '" . date('Y') . "'
+          GROUP BY YEAR(created_at),MONTH(created_at)"); 
+     
+          $record = $query->result();
+          $data = [];
+     
+          foreach($record as $row) {
+                $data['label'][] = $row->month_name;
+                $data['data'][] = (int) $row->count;
+          }
+          $data['chart_data'] = json_encode($data);
+          $this->load->view('bar_chart',$data);
+        }
+
+        public function contas_a_pagar_mes() {
+   
+          $query =  $this->db->query("SELECT COUNT(id) as count,MONTHNAME(created_at) as month_name FROM users WHERE YEAR(created_at) = '" . date('Y') . "'
+          GROUP BY YEAR(created_at),MONTH(created_at)"); 
+     
+          $record = $query->result();
+          $data = [];
+     
+          foreach($record as $row) {
+                $data['label'][] = $row->month_name;
+                $data['data'][] = (int) $row->count;
+          }
+          $data['chart_data'] = json_encode($data);
+          $this->load->view('bar_chart',$data);
+        }
+
+        public function contas_receber_semana() {
+   
+          $query =  $this->db->query("SELECT COUNT(id) as count,MONTHNAME(created_at) as month_name FROM users WHERE YEAR(created_at) = '" . date('Y') . "'
+          GROUP BY YEAR(created_at),MONTH(created_at)"); 
+     
+          $record = $query->result();
+          $data = [];
+     
+          foreach($record as $row) {
+                $data['label'][] = $row->month_name;
+                $data['data'][] = (int) $row->count;
+          }
+          $data['chart_data'] = json_encode($data);
+          $this->load->view('bar_chart',$data);
+        }
+
+        public function contas_receber_mes() {
+   
+          $query =  $this->db->query("SELECT COUNT(id) as count,MONTHNAME(created_at) as month_name FROM users WHERE YEAR(created_at) = '" . date('Y') . "'
+          GROUP BY YEAR(created_at),MONTH(created_at)"); 
+     
+          $record = $query->result();
+          $data = [];
+     
+          foreach($record as $row) {
+                $data['label'][] = $row->month_name;
+                $data['data'][] = (int) $row->count;
+          }
+          $data['chart_data'] = json_encode($data);
+          $this->load->view('bar_chart',$data);
+        }
 
      /*Função Listar Eventos*/
      public function get_events()

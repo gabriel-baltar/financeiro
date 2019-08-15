@@ -24,6 +24,19 @@ class Supervisor_model extends CI_Model{
 
     }
 
+
+    public function contasAPagarSemana(){
+        $sql = "SELECT dayname(start) as dia, dayofweek(start), SUM(valor) as totalSemana FROM tbl_gasto WHERE WEEKOFYEAR(start) = WEEKOFYEAR(now()) AND id_status = 2 GROUP BY dayname(start) ORDER BY dayofweek(start)";
+        $result = $this->db->query($sql);
+        return $result;
+    }
+
+    public function contasAPagarMes(){
+        $sql = "SELECT monthname(start) as mes, SUM(valor) as totalMes FROM tbl_gasto where id_status = 2 AND year(start) = year(now()) GROUP BY monthname(start) ORDER BY dayofmonth(start)"; 
+        $result = $this->db->query($sql);
+        return $result;
+    }
+
     public function totalPagoDia(){
         $query = $this->db->select("SUM(valor), CASE id_status WHEN '1' THEN SUM(valor) ELSE '0' END AS 'totalPagoDia', start FROM tbl_gasto GROUP BY start", FALSE);
         $query = $this->db->get();
@@ -112,6 +125,22 @@ class Supervisor_model extends CI_Model{
     public function boletosAvencerMes(){
         $query = $this->db->select("SUM(valor) AS valor FROM tbl_gasto WHERE MONTH(start) = MONTH(NOW()) AND id_status = '2'", FALSE);
         $query = $this->db->get();
+        return $query;
+    }
+
+    public function listarBeneficios(){
+        $query = $this->db->select("em.empresa, em.telefone,co.porcentagem, co.status, se.tipo FROM tb_empresa em INNER JOIN tb_convenio co ON co.id_empresa = em.id INNER JOIN tb_servicos se ON se.id = co.id_servicos", FALSE);
+        $query = $this->db->get();
+        return $query;
+    }
+
+    public function listarServicos(){
+        $query = $this->db->get('tb_servicos');
+        return $query;        
+    }
+
+    public function listarEmpresas(){
+        $query = $this->db->get('tb_empresa');
         return $query;
     }
 	

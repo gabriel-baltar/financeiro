@@ -38,7 +38,7 @@
 					<a class="" href="<?=base_url('supervisor/index');?>">Calendário</a>
 				</li>
 				<li>
-					<a class="" href="<?=base_url('#');?>">Dashboard</a>
+					<a class="" href="<?=base_url('supervisor/dashboard');?>">Dashboard</a>
 				</li>
 				<li>
 					<a class="" href="<?=base_url('supervisor/convenio');?>">Lista de Convênios</a>

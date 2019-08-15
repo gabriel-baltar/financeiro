@@ -37,7 +37,7 @@
 					<a class="" href="<?=base_url('diretor/index');?>">Calendário</a>
 				</li>
 				<li>
-					<a class="" href="<?=base_url('diretor/index');?>">Dashboard</a>
+					<a class="" href="<?=base_url('diretor/dashboard');?>">Dashboard</a>
 				</li>
 				<li>
 					<a class="" href="<?=base_url('diretor/convenio');?>">Lista de Convênios</a>

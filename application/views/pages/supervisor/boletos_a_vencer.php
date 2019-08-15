@@ -44,4 +44,13 @@
 					</tbody>
 				</table>
 			</div>
+			<nav aria-label="Navegação de página exemplo" class="d-flex justify-content-center">
+				<ul class="pagination">
+					<li class="page-item"><a class="page-link text-dark" href="#">Anterior</a></li>
+					<li class="page-item"><a class="page-link text-dark" href="#">1</a></li>
+					<li class="page-item"><a class="page-link text-dark" href="#">2</a></li>
+					<li class="page-item"><a class="page-link text-dark" href="#">3</a></li>
+					<li class="page-item"><a class="page-link text-dark" href="#">Próximo</a></li>
+				</ul>
+			</nav>
 		</div>
