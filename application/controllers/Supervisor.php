@@ -63,6 +63,20 @@ class Supervisor extends CI_Controller {
 		$this->load->view('tamplete/supervisor/footer');
      }
 
+     public function contareceber()
+     {
+          $this->load->view('tamplete/supervisor/header');
+          $this->load->view('pages/supervisor/contareceber');
+          $this->load->view('tamplete/supervisor/footer');
+     }
+
+     public function relatorios()
+     {
+          $this->load->view('tamplete/supervisor/header');
+          $this->load->view('pages/supervisor/relatorios');
+          $this->load->view('tamplete/supervisor/footer');
+     }
+
      public function dashboard()
 	{
           $dados['contasAPagarSemana'] = $this->Supervisor_model->contasAPagarSemana()->result();
