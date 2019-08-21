@@ -207,7 +207,6 @@ class Supervisor extends CI_Controller {
         }
 
         public function contas_receber_mes() {
-   
           $query =  $this->db->query("SELECT COUNT(id) as count,MONTHNAME(created_at) as month_name FROM users WHERE YEAR(created_at) = '" . date('Y') . "'
           GROUP BY YEAR(created_at),MONTH(created_at)"); 
      
@@ -257,7 +256,7 @@ class Supervisor extends CI_Controller {
                     "title" => $r->segmento,
                     "id_segmento" => $r->id_segmento,
                     "id_status" => $r->id_status,
-                    "id_beneficiario" => $r->id_beneficiario
+                    "id_beneficiario" => $r->id_beneficiario,
 
                );
           }
@@ -382,8 +381,7 @@ class Supervisor extends CI_Controller {
           redirect(site_url("supervisor"));
      }
 
-	
-	
+     	
 }
 
 ?>

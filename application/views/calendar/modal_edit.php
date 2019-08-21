@@ -93,3 +93,15 @@
 								</div>
 							</div>
 						</div>
+
+	<!--function exercitoCalcula(event, perc){
+			event.preventDefault();
+			if(document.getElementById("exercitoReceita").value == ""){
+				alert("A receita precisa ser informada.");
+			}else{
+			var receita = document.getElementById('exercitoReceita').value;
+			var receitaCalculada = receita * Number('0.'+perc);
+			document.getElementById('exercitoReceitaMenos70').value = receitaCalculada;
+			}
+			console.log(Number(perc));
+		}-->

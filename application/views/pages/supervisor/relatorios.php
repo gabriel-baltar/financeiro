@@ -12,30 +12,46 @@
 				<div class="col-sm-6">
 					<div class="card">
 						<div class="card-body">
-							<h5 class="card-title">Fluxo de Despesas</h5>
-							
+							<h5 class="card-title">Lucro Líquido</h5>
+							<canvas id="primeiroGrafico"></canvas>
+							<script>
+								var primeiroGrafico = document.getElementById('primeiroGrafico').getContext('2d');
+								var chart = new Chart(primeiroGrafico, {
+									type: 'line',
+									data: {
+										labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+
+										datasets: [{
+											label: 'Fluxo Caixa Mensal',
+											data: [480000, 250000, 480000, 500000, 470000, 1000000],
+
+											borderColor: "#0000ff"
+										}]
+									}
+								});
+
+							</script>
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-6 mb-5">
+				<div class="col-sm-6 mt-5 mb-5">
 					<div class="card">
 						<div class="card-body">
 							<h5 class="card-title">Fluxo do Lucro Bruto</h5>
-							<canvas id="primeiroGrafico"></canvas>
+							<canvas id="segundoGrafico"></canvas>
 							<script>
-                                let primeiroGrafico = document.getElementById('primeiroGrafico').getContext('2d');
-								let chart = new Chart(primeiroGrafico, {
-								type: 'line',
-								data: {
-									labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+								var segundoGrafico = document.getElementById('segundoGrafico').getContext('2d');
+								var chart = new Chart(segundoGrafico, {
+									type: 'line',
+									data: {
+										labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+										datasets: [{
+											label: 'Fluxo Caixa Mensal',
+											data: [480000, 1850000, 980000, 980000, 870000, 2000000],
 
-									datasets: [{
-										label: 'Fluxo Caixa Mensal',
-										data: [100000, 250000, 480000, 500000, 470000, 1000000],
-										
-                                        borderColor: "#0000ff"
-									}]
-								}
+											borderColor: "#0000ff"
+										}]
+									}
 								});
 
 							</script>
@@ -49,22 +65,23 @@
 					<div class="card">
 						<div class="card-body">
 							<h5 class="card-title">Fluxo do lucro líquido</h5>
-							<canvas id="primeiroGrafico3"></canvas>
+							<canvas id="terceiroGrafico"></canvas>
 							<script>
-                                let primeiroGrafico = document.getElementById('primeiroGrafico3').getContext('2d');
-								let chart = new Chart(primeiroGrafico3, {
-								type: 'line',
-								data: {
-									labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+								var terceiroGrafico = document.getElementById('terceiroGrafico').getContext('2d');
+								var chart = new Chart(terceiroGrafico, {
+									type: 'line',
+									data: {
+										labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
 
-									datasets: [{
-										label: 'Fluxo Caixa Mensal',
-										data: [100000, 250000, 480000, 500000, 470000, 1000000],
-										
-                                        borderColor: "#0000ff"
-									}]
-								}
+										datasets: [{
+											label: 'Fluxo Caixa Mensal',
+											data: [180000, 850000, 380000, 980000, 870000, 2000000],
+
+											borderColor: "#0000ff"
+										}]
+									}
 								});
+
 							</script>
 						</div>
 					</div>
@@ -73,8 +90,24 @@
 					<div class="card">
 						<div class="card-body">
 							<h5 class="card-title">Contas a Receber do Mês</h5>
-							<canvas id="myChart4"></canvas>
+							<canvas id="quartografico"></canvas>
+							<script>
+								var quartografico = document.getElementById('quartografico').getContext('2d');
+								var chart = new Chart(quartografico, {
+									type: 'line',
+									data: {
+										labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
 
+										datasets: [{
+											label: 'Fluxo Caixa Mensal',
+											data: [900000, 350000, 1000000, 650000, 870000, 1000000],
+
+											borderColor: "#0000ff"
+										}]
+									}
+								});
+
+							</script>
 						</div>
 					</div>
 				</div>

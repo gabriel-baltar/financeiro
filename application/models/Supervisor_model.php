@@ -15,12 +15,12 @@ class Supervisor_model extends CI_Model{
 	public function get_events($start, $end)
     {
         //return $this->db->where("start >=", $start)->where("end <=", $end)->get("tbl_gasto");
-        $this->db->select('tbl_gasto.id, tbl_gasto.codigo_de_barras, tbl_gasto.valor, tbl_gasto.id_segmento, tbl_gasto.id_status, tbl_gasto.id_beneficiario, tbl_gasto.vencimento, tbl_gasto.obs, tbl_gasto.start, tbl_gasto.end, segmento');
+        $this->db->select('tbl_gasto.id, tbl_gasto.codigo_de_barras, tbl_gasto.valor, tbl_gasto.id_segmento, tbl_gasto.id_status, tbl_gasto.id_beneficiario, tbl_gasto.vencimento, tbl_gasto.obs, tbl_gasto.start, tbl_gasto.end, segmento', FALSE);
         $this->db->from('tbl_gasto');
         $this->db->join('tbl_segmento', 'tbl_segmento.id = tbl_gasto.id_segmento');
         $this->db->where("tbl_gasto.start >=", $start)->where("tbl_gasto.end <=", $end);
         $query = $this->db->get();
-        return $query;      
+        return $query;     
 
     }
 
@@ -64,7 +64,7 @@ class Supervisor_model extends CI_Model{
     }
 
     public function get_beneficiario(){
-
+        $sql = "SELECT * FROM tbl_beneficiario ORDER BY id DESC";
         return $this->db->get('tbl_beneficiario');
     }
 
