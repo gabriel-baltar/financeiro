@@ -15,13 +15,26 @@ class Diretor_model extends CI_Model{
 	public function get_events($start, $end)
     {
         //return $this->db->where("start >=", $start)->where("end <=", $end)->get("tbl_gasto");
-        $this->db->select('tbl_gasto.id, tbl_gasto.codigo_de_barras, tbl_gasto.valor, tbl_gasto.id_segmento, tbl_gasto.id_status, tbl_gasto.id_beneficiario, tbl_gasto.vencimento, tbl_gasto.obs, tbl_gasto.start, tbl_gasto.end, segmento');
+        $this->db->select('tbl_gasto.id, tbl_gasto.codigo_de_barras, tbl_gasto.valor, tbl_gasto.id_segmento, tbl_gasto.id_status, tbl_gasto.id_beneficiario, tbl_gasto.vencimento, tbl_gasto.obs, tbl_gasto.start, tbl_gasto.end, tbl_segmento.segmento, totais.totalPagoDia');
         $this->db->from('tbl_gasto');
         $this->db->join('tbl_segmento', 'tbl_segmento.id = tbl_gasto.id_segmento');
+        $this->db->join('totais', 'totais.start = tbl_gasto.start');
         $this->db->where("tbl_gasto.start >=", $start)->where("tbl_gasto.end <=", $end);
         $query = $this->db->get();
-        return $query;
+        return $query;      
 
+    }
+
+    public function boletosPagosMes(){
+        $query = $this->db->select("SUM(valor) AS valor FROM tbl_gasto WHERE MONTH(start) = MONTH(NOW()) AND id_status = '4'", FALSE);
+        $query = $this->db->get();
+        return $query;
+    }
+    
+    public function boletosAvencerMes(){
+        $query = $this->db->select("SUM(valor) AS valor FROM tbl_gasto WHERE MONTH(start) = MONTH(NOW()) AND id_status = '2'", FALSE);
+        $query = $this->db->get();
+        return $query;
     }
     
     public function add_event($data)

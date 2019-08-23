@@ -17,6 +17,7 @@ class Supervisor extends CI_Controller {
           $dados['boletos'] = $this->Supervisor_model->get_boletos_pagos()->result();
           $dados['debitosMes'] = $this->Supervisor_model->boletosAvencerMes()->result();
           $dados['totalPagoDia'] = $this->Supervisor_model->totalPagoDia()->result();
+          $dados['pagoMes'] = $this->Supervisor_model->boletosPagosMes()->result();
           //echo $this->db->last_query(); //Use para verificar a última consulta executada
           //exit(); 
           $this->load->view("calendar/index.php", $dados); 
@@ -99,7 +100,7 @@ class Supervisor extends CI_Controller {
 		$this->load->view('pages/supervisor/dashboard', $data);
 		$this->load->view('tamplete/supervisor/footer');
      }
-
+  
      public function contasAPagarMes()
 	{
           $dados['contasAPagarMes'] = $this->Supervisor_model->contasAPagarMes()->result();

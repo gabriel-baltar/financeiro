@@ -15,6 +15,8 @@ class Diretor extends CI_Controller {
           $dados['status'] = $this->Diretor_model->get_status()->result();
           $dados['beneficiario'] = $this->Diretor_model->get_beneficiario()->result();
           $dados['boletos'] = $this->Diretor_model->get_boletos_pagos()->result();
+          $dados['pagoMes'] = $this->Diretor_model->boletosPagosMes()->result();
+          $dados['debitosMes'] = $this->Diretor_model->boletosAvencerMes()->result();
           //echo $this->db->last_query(); //Use para verificar a última consulta executada
           //exit(); 
           $this->load->view("calendar_diretor/index.php", $dados);

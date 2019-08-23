@@ -70,7 +70,7 @@
 									data: {
 										labels: cData.mes,
 										datasets: [{
-											label: 'Apagar',
+											label: '',
 											data:cData.totalMes,
 											backgroundColor: [
 												'rgba(255, 99, 132, 0.2)',

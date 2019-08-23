@@ -112,7 +112,7 @@
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title col-md-12" id="exampleModalLabel">Adicionar Empresa</h5>
+					<h5 class="modal-title col-md-12" id="company">Adicionar Empresa</h5>
 				</div>
 				<div class="row m-3">
 					<div class="col col-md-6 mt-2">
@@ -167,7 +167,7 @@
 				</div>
 				<div class="form-group col-md-12 mt-2">
 					<label for="inputservice">Adicionar Serviço</label>
-					<input type="service" class="form-control" name="inputservice" id="inputservice"
+					<input type="text" class="form-control" name="inputservice" id="inputservice"
 						placeholder="Adicionar Serviço" required>
 				</div>
 				<div class="form-group row m-1 mb-3">
