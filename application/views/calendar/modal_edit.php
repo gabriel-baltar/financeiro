@@ -40,17 +40,17 @@
 
 												<div class="col-md-6">
 													<label for="valor" class="label-heading">Valor</label>
-													<input type="text" class="money form-control" name="valor" id="valor" placeholder="R$ 0.000,00" reverse="true" required>
+													<input type="text" class="money form-control" name="valor" id="valor" reverse="true" required>
 												</div>
 
 												<div class="col-md-12">
 													<label for="codigo" class="label-heading">Código de Barras</label>
-													<input type="text" class="form-control" name="codigo" id="codigo">
+													<input type="text" class="form-control" name="codigo" id="codigo" required>
 												</div>
 
 												<div class="col-md-12">
 													<label for="obs" class="label-heading">Obsrevações</label>
-													<textarea class="form-control" id="obs" name="obs" rows="3"></textarea>
+													<textarea class="form-control" id="obs" name="obs" rows="3" required></textarea>
 												</div>
 
 												<div class="col-md-7">

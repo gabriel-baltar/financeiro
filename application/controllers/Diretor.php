@@ -63,9 +63,25 @@ class Diretor extends CI_Controller {
      
      public function dashboard()
 	{
-		$this->load->view('tamplete/diretor/header');
-		$this->load->view('pages/diretor/dashboard');
-		$this->load->view('tamplete/diretor/footer');
+          $dados['contasAPagarSemana'] = $this->Diretor_model->contasAPagarSemana()->result();
+          $data = [];
+          foreach($dados['contasAPagarSemana'] as $row){
+               $data['dia'][] = $row->dia;
+               $data['totalSemana'][] = $row->totalSemana;
+          }
+
+          $dados['contasAPagarMes'] = $this->Diretor_model->contasAPagarMes()->result();
+          $mes = [];
+          foreach($dados['contasAPagarMes'] as $row){
+               $mes['mes'][] = $row->mes;
+               $mes['totalMes'][] = $row->totalMes;
+          }
+
+          $data['chart_data'] = json_encode($data);
+          $data['chart_mes'] = json_encode($mes);
+		$this->load->view('tamplete/Diretor/header');
+		$this->load->view('pages/Diretor/dashboard', $data);
+		$this->load->view('tamplete/Diretor/footer');
      }
      
      public function contas_a_pagar_semana() {

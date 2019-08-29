@@ -25,6 +25,18 @@ class Diretor_model extends CI_Model{
 
     }
 
+    public function contasAPagarSemana(){
+        $sql = "SELECT dayname(start) as dia, dayofweek(start), SUM(valor) as totalSemana FROM tbl_gasto WHERE WEEKOFYEAR(start) = WEEKOFYEAR(now()) AND id_status = 2 GROUP BY dayname(start) ORDER BY dayofweek(start)";
+        $result = $this->db->query($sql);
+        return $result;
+    }
+
+    public function contasAPagarMes(){
+        $sql = "SELECT monthname(start) as mes, SUM(valor) as totalMes FROM tbl_gasto where id_status = 2 AND year(start) = year(now()) GROUP BY monthname(start) ORDER BY dayofmonth(start)"; 
+        $result = $this->db->query($sql);
+        return $result;
+    }
+
     public function boletosPagosMes(){
         $query = $this->db->select("SUM(valor) AS valor FROM tbl_gasto WHERE MONTH(start) = MONTH(NOW()) AND id_status = '4'", FALSE);
         $query = $this->db->get();

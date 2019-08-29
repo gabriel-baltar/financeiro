@@ -17,14 +17,15 @@
 							<h5 class="card-title">Conta a Pagar da Semana</h5>
 							<canvas id="myChart"></canvas>
 							<script>
+								var cData = JSON.parse('<?php echo $chart_data;?>');
 								var ctx = document.getElementById('myChart');
 								var myChart = new Chart(ctx, {
 									type: 'bar',
 									data: {
-										labels: ['Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul'],
+										labels: cData.dia,
 										datasets: [{
-											label: 'Remover',
-											data: [12, 19, 3, 5, 2, 3],
+											label: '',
+											data: cData.totalSemana,
 											backgroundColor: [
 												'rgba(255, 99, 132, 0.2)',
 												'rgba(54, 162, 235, 0.2)',
@@ -64,14 +65,15 @@
 							<h5 class="card-title">Contas a Pagar do Mês</h5>
 							<canvas id="myChart2"></canvas>
 							<script>
+								var cData = JSON.parse('<?php echo $chart_mes; ?>');
 								var ctx = document.getElementById('myChart2');
 								var myChart2 = new Chart(ctx, {
 									type: 'bar',
 									data: {
-										labels: ['Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul'],
+										labels: cData.mes,
 										datasets: [{
-											label: 'Remover',
-											data: [12, 19, 3, 5, 2, 3],
+											label: '',
+											data: cData.totalMes,
 											backgroundColor: [
 												'rgba(255, 99, 132, 0.2)',
 												'rgba(54, 162, 235, 0.2)',

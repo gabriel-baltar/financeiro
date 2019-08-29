@@ -120,6 +120,10 @@
 												success: function (msg) {
 													var events = msg.events;
 													callback(events);
+													for(i in events){
+														var dt = document.querySelectorAll(".fc-time");
+														dt[i].style.display = 'none';
+													}
 												}
 											});
 										}
@@ -139,6 +143,7 @@
 										document.getElementById("id_status").value = event.id_status;
 										document.getElementById("id_segmento").value = event.id_segmento;
 										document.getElementById("edit_data").value = event.start._i;
+										document.getElementById("totalPagoDia").innerHTML = event.totalPagoDia;
 										$('#editModal').modal();
 										console.log(event);
 									},

@@ -38,10 +38,16 @@ class Supervisor_model extends CI_Model{
         return $result;
     }
 
-    public function totalPagoDia(){
-        $query = $this->db->select("SUM(valor), CASE id_status WHEN '1' THEN SUM(valor) ELSE '0' END AS 'totalPagoDia', start FROM tbl_gasto GROUP BY start", FALSE);
-        $query = $this->db->get();
-        return $query;
+    public function contasPagasSemana(){
+        $sql = "SELECT dayname(start) as dia, dayofweek(start), SUM(valor) as totalPagoSemana FROM tbl_gasto WHERE WEEKOFYEAR(start) = WEEKOFYEAR(now()) AND id_status = 4 GROUP BY dayname(start) ORDER BY dayofweek(start)";
+        $result = $this->db->query($sql);
+        return $result;
+    }
+
+    public function contasPagasMes(){
+        $sql = "SELECT monthname(start) as mes, SUM(valor) as totalPagoMes FROM tbl_gasto where id_status = 4 AND year(start) = year(now()) GROUP BY monthname(start) ORDER BY dayofmonth(start)"; 
+        $result = $this->db->query($sql);
+        return $result;
     }
 
     public function boletosPagosMes(){
@@ -95,7 +101,7 @@ class Supervisor_model extends CI_Model{
         $this->db->join('tbl_beneficiario', 'tbl_beneficiario.id = tbl_gasto.id_beneficiario');
         $this->db->join('tbl_status', 'tbl_status.id = tbl_gasto.id_status');
         $this->db->join('tbl_segmento', 'tbl_segmento.id = tbl_gasto.id_segmento');
-        $this->db->where("tbl_gasto.id_status =", "1");
+        $this->db->where("tbl_gasto.id_status =", "4");
         $query = $this->db->get();
         return $query;
 

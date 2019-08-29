@@ -16,10 +16,7 @@ class Supervisor extends CI_Controller {
           $dados['beneficiario'] = $this->Supervisor_model->get_beneficiario()->result();
           $dados['boletos'] = $this->Supervisor_model->get_boletos_pagos()->result();
           $dados['debitosMes'] = $this->Supervisor_model->boletosAvencerMes()->result();
-          $dados['totalPagoDia'] = $this->Supervisor_model->totalPagoDia()->result();
           $dados['pagoMes'] = $this->Supervisor_model->boletosPagosMes()->result();
-          //echo $this->db->last_query(); //Use para verificar a última consulta executada
-          //exit(); 
           $this->load->view("calendar/index.php", $dados); 
      }
 
@@ -94,8 +91,24 @@ class Supervisor extends CI_Controller {
                $mes['totalMes'][] = $row->totalMes;
           }
 
+          $dados['contasPagasSemana'] = $this->Supervisor_model->contasPagasSemana()->result();
+          $dia = [];
+          foreach($dados['contasPagasSemana'] as $row){
+               $dia['dia'][] = $row->dia;
+               $dia['totalPagoSemana'][] = $row->totalPagoSemana;
+          }
+
+          $dados['contasPagasMes'] = $this->Supervisor_model->contasPagasMes()->result();
+          $mespago = [];
+          foreach($dados['contasPagasMes'] as $row){
+               $mespago['mes'][] = $row->mes;
+               $mespago['totalPagoMes'][] = $row->totalPagoMes;
+          }
+
           $data['chart_data'] = json_encode($data);
           $data['chart_mes'] = json_encode($mes);
+          $data['chart_pago_semana'] = json_encode($dia);
+          $data['chart_pago_mes'] = json_encode($mespago);
 		$this->load->view('tamplete/supervisor/header');
 		$this->load->view('pages/supervisor/dashboard', $data);
 		$this->load->view('tamplete/supervisor/footer');
@@ -238,11 +251,9 @@ class Supervisor extends CI_Controller {
                $end_format = $enddt->format('Y-m-d H:i:s');
 
                $events = $this->Supervisor_model->get_events($start_format, $end_format);
-               $totalPagoDia = $this->Supervisor_model->totalPagoDia();
                $data_events = array();
 
               $eventos = $events->result();
-              $totais = $totalPagoDia->result();
             
                
               foreach($events->result() as $r) {
@@ -258,6 +269,7 @@ class Supervisor extends CI_Controller {
                     "id_segmento" => $r->id_segmento,
                     "id_status" => $r->id_status,
                     "id_beneficiario" => $r->id_beneficiario,
+                    "totalPagoDia" => $r->totalPagoDia
 
                );
           }

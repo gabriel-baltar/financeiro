@@ -111,11 +111,112 @@
 				<div class="col-sm-6">
 					<div class="card">
 						<div class="card-body">
-							<h5 class="card-title">Contas a Receber da Semana</h5>
+							<h5 class="card-title">Contas Pagas da Semana</h5>
 							<canvas id="myChart3"></canvas>
 							<script>
+								var cData = JSON.parse('<?php echo $chart_pago_semana;?>');
 								var ctx = document.getElementById('myChart3');
 								var myChart3 = new Chart(ctx, {
+									type: 'bar',
+									data: {
+										labels: cData.dia,
+										datasets: [{
+											label: '',
+											data: cData.totalPagoSemana,
+											backgroundColor: [
+												'rgba(255, 99, 132, 0.2)',
+												'rgba(54, 162, 235, 0.2)',
+												'rgba(255, 206, 86, 0.2)',
+												'rgba(75, 192, 192, 0.2)',
+												'rgba(153, 102, 255, 0.2)',
+												'rgba(255, 159, 64, 0.2)'
+											],
+											borderColor: [
+												'rgba(255, 99, 132, 1)',
+												'rgba(54, 162, 235, 1)',
+												'rgba(255, 206, 86, 1)',
+												'rgba(75, 192, 192, 1)',
+												'rgba(153, 102, 255, 1)',
+												'rgba(255, 159, 64, 1)'
+											],
+											borderWidth: 1
+										}]
+									},
+									options: {
+										scales: {
+											yAxes: [{
+												ticks: {
+													beginAtZero: true
+												}
+											}]
+										}
+									}
+								});
+
+							</script>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 mb-5">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">Contas Pagas do Mês</h5>
+							<canvas id="myChart4"></canvas>
+							<script>
+								var cData = JSON.parse('<?php echo $chart_pago_mes;?>');
+								var ctx = document.getElementById('myChart4');
+								var myChart4 = new Chart(ctx, {
+									type: 'bar',
+									data: {
+										labels: cData.mes,
+										datasets: [{
+											label: '',
+											data: cData.totalPagoMes,
+											backgroundColor: [
+												'rgba(255, 99, 132, 0.2)',
+												'rgba(54, 162, 235, 0.2)',
+												'rgba(255, 206, 86, 0.2)',
+												'rgba(75, 192, 192, 0.2)',
+												'rgba(153, 102, 255, 0.2)',
+												'rgba(255, 159, 64, 0.2)'
+											],
+											borderColor: [
+												'rgba(255, 99, 132, 1)',
+												'rgba(54, 162, 235, 1)',
+												'rgba(255, 206, 86, 1)',
+												'rgba(75, 192, 192, 1)',
+												'rgba(153, 102, 255, 1)',
+												'rgba(255, 159, 64, 1)'
+											],
+											borderWidth: 1
+										}]
+									},
+									options: {
+										scales: {
+											yAxes: [{
+												ticks: {
+													beginAtZero: true
+												}
+											}]
+										}
+									}
+								});
+
+							</script>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+			<div class="col-sm-6 mb-5">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">Contas a Receber do Mês</h5>
+							<canvas id="myChart5"></canvas>
+							<script>
+								var ctx = document.getElementById('myChart5');
+								var myChart5 = new Chart(ctx, {
 									type: 'bar',
 									data: {
 										labels: ['Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul'],
@@ -156,14 +257,15 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-6 mb-5">
+
+			<div class="col-sm-6 mb-5">
 					<div class="card">
 						<div class="card-body">
 							<h5 class="card-title">Contas a Receber do Mês</h5>
-							<canvas id="myChart4"></canvas>
+							<canvas id="myChart6"></canvas>
 							<script>
-								var ctx = document.getElementById('myChart4');
-								var myChart4 = new Chart(ctx, {
+								var ctx = document.getElementById('myChart6');
+								var myChart6 = new Chart(ctx, {
 									type: 'bar',
 									data: {
 										labels: ['Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul'],
@@ -205,7 +307,7 @@
 					</div>
 				</div>
 			</div>
-
+		</div>
 
 		</div>
 	</div>
