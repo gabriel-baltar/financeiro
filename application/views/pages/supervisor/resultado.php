@@ -22,10 +22,10 @@
 			</div>
 		</form>-->
 
-			<form class="form-inline mt-3 mb-5" action="<?=base_url('supervisor/listaado/')?>" method="post">
+			<!--<form class="form-inline mt-3 mb-5" action="<?=base_url('supervisor/resultado/')?>" method="post">
                 <input class="form-control mr-sm-2" type="search" name="busca" id="busca" placeholder="Pesquisar" aria-label="Pesquisar">
                 <button class="btn btn-primary my-2 my-sm-0" type="submit">Pesquisar</button>
-            </form>
+            </form>-->
 
 			<div class="row">
 				<table id="listar" class="table table-hover row-12">

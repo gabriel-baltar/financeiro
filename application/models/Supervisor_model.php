@@ -95,8 +95,9 @@ class Supervisor_model extends CI_Model{
 
     public function get_boletos_pagos()
     {
+        //$sql = "SELECT DATE_FORMAT(`start`,'%d/%m/%Y') AS data_formatada FROM `tbl_gasto`"; 
         //return $this->db->where("start >=", $start)->where("end <=", $end)->get("tbl_gasto");
-        $this->db->select('tbl_segmento.segmento, tbl_beneficiario.beneficiario, tbl_gasto.start, tbl_gasto.end, tbl_status.status, tbl_gasto.valor, tbl_gasto.codigo_de_barras');
+        $this->db->select('tbl_segmento.segmento, tbl_beneficiario.beneficiario, tbl_gasto.start, tbl_gasto.end, tbl_status.status, tbl_gasto.valor, tbl_gasto.codigo_de_barras, tbl_gasto.start, tbl_gasto.end');
         $this->db->from('tbl_gasto');
         $this->db->join('tbl_beneficiario', 'tbl_beneficiario.id = tbl_gasto.id_beneficiario');
         $this->db->join('tbl_status', 'tbl_status.id = tbl_gasto.id_status');
@@ -104,28 +105,34 @@ class Supervisor_model extends CI_Model{
         $this->db->where("tbl_gasto.id_status =", "4");
         $query = $this->db->get();
         return $query;
+        return $this->db->where("start >=", $start)->where("end <=", $end)->get("tbl_gasto");
         return $this->db->get('tbl_gasto')->result_array();
 
     }
     /* FUNÇÃO DE PESQUISA NO BANCO DE DADOS */
 
-    public function busca($busca){
-        if(empty($busca))
-            return array();
-        $busca = $this->input->post('busca');
-        $this->db->like('start', $busca);
-        $this->db->join('tbl_beneficiario', 'tbl_beneficiario.id = tbl_gasto.id_beneficiario');
-        $this->db->join('tbl_status', 'tbl_status.id = tbl_gasto.id_status');
-        $this->db->join('tbl_segmento', 'tbl_segmento.id = tbl_gasto.id_segmento');
-        $this->db->where("tbl_gasto.id_status =", "4");
-        $query = $this->db->get('tbl_gasto');
-        return $query;
+    public function procuraBoletosAVencer($inicio, $fim){
+        $sql = "SELECT gt.codigo_de_barras, gt.valor, sg.segmento, st.status, bn.beneficiario FROM tbl_gasto gt INNER JOIN tbl_segmento sg ON gt.id_segmento = sg.id INNER JOIN tbl_status st ON gt.id_status = st.id INNER JOIN tbl_beneficiario bn ON gt.id_beneficiario = bn.id WHERE DATE_FORMAT(start, '%Y-%m-%d') >= '$inicio' AND DATE_FORMAT(start, '%Y-%m-%d') <= '$fim' AND gt.id_status = '2'"; 
+        $result = $this->db->query($sql);
+        return $result;		
     }
+    
+    public function procuraBoletosPagos($inicio, $fim){
+        $sql = "SELECT gt.codigo_de_barras, gt.valor, sg.segmento, st.status, bn.beneficiario FROM tbl_gasto gt INNER JOIN tbl_segmento sg ON gt.id_segmento = sg.id INNER JOIN tbl_status st ON gt.id_status = st.id INNER JOIN tbl_beneficiario bn ON gt.id_beneficiario = bn.id WHERE DATE_FORMAT(start, '%Y-%m-%d') >= '$inicio' AND DATE_FORMAT(start, '%Y-%m-%d') <= '$fim' AND gt.id_status = '4'"; 
+        $result = $this->db->query($sql);
+        return $result;		
+    }
+    
+	public function procuraBoletosVencidos($inicio, $fim){
+        $sql = "SELECT gt.codigo_de_barras, gt.valor, sg.segmento, st.status, bn.beneficiario FROM tbl_gasto gt INNER JOIN tbl_segmento sg ON gt.id_segmento = sg.id INNER JOIN tbl_status st ON gt.id_status = st.id INNER JOIN tbl_beneficiario bn ON gt.id_beneficiario = bn.id WHERE DATE_FORMAT(start, '%Y-%m-%d') >= '$inicio' AND DATE_FORMAT(start, '%Y-%m-%d') <= '$fim' AND gt.id_status = '3'"; 
+        $result = $this->db->query($sql);
+        return $result;		
+	}	
 
     public function get_boletos_a_vencer()
     {
         //return $this->db->where("start >=", $start)->where("end <=", $end)->get("tbl_gasto");
-        $this->db->select('tbl_segmento.segmento, tbl_beneficiario.beneficiario, tbl_status.status, tbl_gasto.valor, tbl_gasto.codigo_de_barras');
+        $this->db->select('tbl_segmento.segmento, tbl_beneficiario.beneficiario, tbl_status.status, tbl_gasto.valor, tbl_gasto.codigo_de_barras, DATE_FORMAT(`start`,`%d/%m/%Y`) AS data_formatada FROM `tbl_gasto`');
         $this->db->from('tbl_gasto');
         $this->db->join('tbl_beneficiario', 'tbl_beneficiario.id = tbl_gasto.id_beneficiario');
         $this->db->join('tbl_status', 'tbl_status.id = tbl_gasto.id_status');

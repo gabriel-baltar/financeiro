@@ -43,14 +43,14 @@ class Supervisor extends CI_Controller {
 		$this->load->view('tamplete/supervisor/header');
 		$this->load->view('pages/supervisor/boletospagos', $dados);
           $this->load->view('tamplete/supervisor/footer');
+		$this->load->view('pages/supervisor/boletospagos');
+          $this->load->view('tamplete/supervisor/footer');
      }
 
      public function resultado()
-	{
-		$dados['listagem'] = $this->Supervisor_model->busca($_POST)->result();
-		$this->load->view('tamplete/supervisor/header');
-		$this->load->view('pages/supervisor/resultado', $dados);
-		$this->load->view('tamplete/supervisor/footer');
+
+          $this->load->view('tamplete/supervisor/footer');
+
      }
      
 
@@ -59,16 +59,48 @@ class Supervisor extends CI_Controller {
 		$dados['boletos'] = $this->Supervisor_model->get_boletos_a_vencer()->result();
 		$this->load->view('tamplete/supervisor/header');
 		$this->load->view('pages/supervisor/boletos_a_vencer', $dados);
+		$this->load->view('pages/supervisor/boletos_a_vencer');
 		$this->load->view('tamplete/supervisor/footer');
 	}
 
-	public function boletos_Vencidos()
+     public function boletos_Vencidos()
 	{
 		$dados['boletos'] = $this->Supervisor_model->get_boletos_vencidos()->result();
 		$this->load->view('tamplete/supervisor/header');
 		$this->load->view('pages/supervisor/boletos_vencidos', $dados);
+		$this->load->view('pages/supervisor/boletos_vencidos');
 		$this->load->view('tamplete/supervisor/footer');
      }
+
+     public function procuraBoletosAVencer(){
+		$inicio = $this->input->post("inicio");
+		$fim = $this->input->post("fim");
+		$data['boletos'] =  $this->Supervisor_model->procuraBoletosAVencer($inicio, $fim)->result();
+		$this->load->view('tamplete/supervisor/header');
+		$this->load->view('pages/supervisor/boletos_a_vencer', $data);
+		$this->load->view('tamplete/supervisor/footer');		 
+		 
+      }
+      
+      public function procuraBoletosPagos(){
+		$inicio = $this->input->post("inicio");
+		$fim = $this->input->post("fim");
+		$data['boletos'] =  $this->Supervisor_model->procuraBoletosPagos($inicio, $fim)->result();
+		$this->load->view('tamplete/supervisor/header');
+		$this->load->view('pages/supervisor/boletospagos', $data);
+		$this->load->view('tamplete/supervisor/footer');		 
+		 
+      }
+      
+      public function procuraBoletosVencidos(){
+		$inicio = $this->input->post("inicio");
+		$fim = $this->input->post("fim");
+		$data['boletos'] =  $this->Supervisor_model->procuraBoletosVencidos($inicio, $fim)->result();
+		$this->load->view('tamplete/supervisor/header');
+		$this->load->view('pages/supervisor/boletos_vencidos', $data);
+		$this->load->view('tamplete/supervisor/footer');		 
+		 
+	 }	
 
      public function contareceber()
      {
