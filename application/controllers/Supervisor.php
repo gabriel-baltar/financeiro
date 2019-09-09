@@ -39,12 +39,16 @@ class Supervisor extends CI_Controller {
 
 	public function boletosPagos()
 	{
-		$dados['boletos'] = $this->Supervisor_model->get_boletos_pagos()->result();
 		$this->load->view('tamplete/supervisor/header');
+<<<<<<< HEAD
 		$this->load->view('pages/supervisor/boletospagos', $dados);
           $this->load->view('tamplete/supervisor/footer');
 		$this->load->view('pages/supervisor/boletospagos');
           $this->load->view('tamplete/supervisor/footer');
+=======
+		$this->load->view('pages/supervisor/boletospagos');
+        $this->load->view('tamplete/supervisor/footer');
+>>>>>>> eb25f9b2cc328f492d6756dbf2907845e4bbf339
      }
 
      public function resultado()
@@ -53,21 +57,25 @@ class Supervisor extends CI_Controller {
 
      }
      
-
+	
 	public function boletos_a_vencer()
 	{
-		$dados['boletos'] = $this->Supervisor_model->get_boletos_a_vencer()->result();
 		$this->load->view('tamplete/supervisor/header');
+<<<<<<< HEAD
 		$this->load->view('pages/supervisor/boletos_a_vencer', $dados);
+=======
+>>>>>>> eb25f9b2cc328f492d6756dbf2907845e4bbf339
 		$this->load->view('pages/supervisor/boletos_a_vencer');
 		$this->load->view('tamplete/supervisor/footer');
 	}
 
      public function boletos_Vencidos()
 	{
-		$dados['boletos'] = $this->Supervisor_model->get_boletos_vencidos()->result();
 		$this->load->view('tamplete/supervisor/header');
+<<<<<<< HEAD
 		$this->load->view('pages/supervisor/boletos_vencidos', $dados);
+=======
+>>>>>>> eb25f9b2cc328f492d6756dbf2907845e4bbf339
 		$this->load->view('pages/supervisor/boletos_vencidos');
 		$this->load->view('tamplete/supervisor/footer');
      }
@@ -434,7 +442,36 @@ class Supervisor extends CI_Controller {
           //exit(); 
           redirect(site_url("supervisor"));
      }
+	 
+	 public function procuraBoletosAVencer(){
+		$inicio = $this->input->post("inicio");
+		$fim = $this->input->post("fim");
+		$data['boletos'] =  $this->Supervisor_model->procuraBoletosAVencer($inicio, $fim)->result();
+		$this->load->view('tamplete/supervisor/header');
+		$this->load->view('pages/supervisor/boletos_a_vencer', $data);
+		$this->load->view('tamplete/supervisor/footer');		 
+		 
+	 }
 
+	 public function procuraBoletosPagos(){
+		$inicio = $this->input->post("inicio");
+		$fim = $this->input->post("fim");
+		$data['boletos'] =  $this->Supervisor_model->procuraBoletosPagos($inicio, $fim)->result();
+		$this->load->view('tamplete/supervisor/header');
+		$this->load->view('pages/supervisor/boletospagos', $data);
+		$this->load->view('tamplete/supervisor/footer');		 
+		 
+	 }
+	 
+	 public function procuraBoletosVencidos(){
+		$inicio = $this->input->post("inicio");
+		$fim = $this->input->post("fim");
+		$data['boletos'] =  $this->Supervisor_model->procuraBoletosVencidos($inicio, $fim)->result();
+		$this->load->view('tamplete/supervisor/header');
+		$this->load->view('pages/supervisor/boletos_vencidos', $data);
+		$this->load->view('tamplete/supervisor/footer');		 
+		 
+	 }	 
      	
 }
 

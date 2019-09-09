@@ -37,9 +37,9 @@
 				<li>
 					<a class="" href="<?=base_url('supervisor/index');?>">Calendário</a>
 				</li>
-				<li>
+				<!--<li>
 					<a class="" href="<?=base_url('supervisor/dashboard');?>">Dashboard</a>
-				</li>
+				</li>-->
 				<li>
 					<a class="" href="<?=base_url('supervisor/convenio');?>">Lista de Convênios</a>
 				</li>
@@ -55,9 +55,9 @@
 				<li>
 					<a href="<?=base_url('supervisor/contareceber');?>" class="">Contas a Receber</a>
 				</li>
-				<li>
+				<!--<li>
 					<a href="<?=base_url('supervisor/relatorios');?>" class="">Relatórios</a>
-				</li>
+				</li>-->
 			</ul>
 		</nav>
 
