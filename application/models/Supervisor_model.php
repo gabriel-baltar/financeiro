@@ -105,29 +105,12 @@ class Supervisor_model extends CI_Model{
         $this->db->where("tbl_gasto.id_status =", "4");
         $query = $this->db->get();
         return $query;
-        return $this->db->where("start >=", $start)->where("end <=", $end)->get("tbl_gasto");
-        return $this->db->get('tbl_gasto')->result_array();
+        //return $this->db->where("start >=", $start)->where("end <=", $end)->get("tbl_gasto");
+        //return $this->db->get('tbl_gasto')->result_array();
 
     }
     /* FUNÇÃO DE PESQUISA NO BANCO DE DADOS */
 
-    public function procuraBoletosAVencer($inicio, $fim){
-        $sql = "SELECT gt.codigo_de_barras, gt.valor, sg.segmento, st.status, bn.beneficiario FROM tbl_gasto gt INNER JOIN tbl_segmento sg ON gt.id_segmento = sg.id INNER JOIN tbl_status st ON gt.id_status = st.id INNER JOIN tbl_beneficiario bn ON gt.id_beneficiario = bn.id WHERE DATE_FORMAT(start, '%Y-%m-%d') >= '$inicio' AND DATE_FORMAT(start, '%Y-%m-%d') <= '$fim' AND gt.id_status = '2'"; 
-        $result = $this->db->query($sql);
-        return $result;		
-    }
-    
-    public function procuraBoletosPagos($inicio, $fim){
-        $sql = "SELECT gt.codigo_de_barras, gt.valor, sg.segmento, st.status, bn.beneficiario FROM tbl_gasto gt INNER JOIN tbl_segmento sg ON gt.id_segmento = sg.id INNER JOIN tbl_status st ON gt.id_status = st.id INNER JOIN tbl_beneficiario bn ON gt.id_beneficiario = bn.id WHERE DATE_FORMAT(start, '%Y-%m-%d') >= '$inicio' AND DATE_FORMAT(start, '%Y-%m-%d') <= '$fim' AND gt.id_status = '4'"; 
-        $result = $this->db->query($sql);
-        return $result;		
-    }
-    
-	public function procuraBoletosVencidos($inicio, $fim){
-        $sql = "SELECT gt.codigo_de_barras, gt.valor, sg.segmento, st.status, bn.beneficiario FROM tbl_gasto gt INNER JOIN tbl_segmento sg ON gt.id_segmento = sg.id INNER JOIN tbl_status st ON gt.id_status = st.id INNER JOIN tbl_beneficiario bn ON gt.id_beneficiario = bn.id WHERE DATE_FORMAT(start, '%Y-%m-%d') >= '$inicio' AND DATE_FORMAT(start, '%Y-%m-%d') <= '$fim' AND gt.id_status = '3'"; 
-        $result = $this->db->query($sql);
-        return $result;		
-	}	
 
     public function get_boletos_a_vencer()
     {
@@ -195,7 +178,7 @@ class Supervisor_model extends CI_Model{
         $sql = "SELECT gt.codigo_de_barras, gt.valor, sg.segmento, st.status, bn.beneficiario FROM tbl_gasto gt INNER JOIN tbl_segmento sg ON gt.id_segmento = sg.id INNER JOIN tbl_status st ON gt.id_status = st.id INNER JOIN tbl_beneficiario bn ON gt.id_beneficiario = bn.id WHERE DATE_FORMAT(start, '%Y-%m-%d') >= '$inicio' AND DATE_FORMAT(start, '%Y-%m-%d') <= '$fim' AND gt.id_status = '3'"; 
         $result = $this->db->query($sql);
         return $result;		
-	}	
+	}
      
 }
 

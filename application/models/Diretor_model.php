@@ -94,7 +94,7 @@ class Diretor_model extends CI_Model{
         $this->db->join('tbl_beneficiario', 'tbl_beneficiario.id = tbl_gasto.id_beneficiario');
         $this->db->join('tbl_status', 'tbl_status.id = tbl_gasto.id_status');
         $this->db->join('tbl_segmento', 'tbl_segmento.id = tbl_gasto.id_segmento');
-        $this->db->where("tbl_gasto.id_status =", "1");
+        $this->db->where("tbl_gasto.id_status =", "4");
         $query = $this->db->get();
         return $query;
 
@@ -127,6 +127,24 @@ class Diretor_model extends CI_Model{
         return $query;
 
     }
+
+    public function procuraBoletosAVencer($inicio, $fim){
+        $sql = "SELECT gt.codigo_de_barras, gt.valor, sg.segmento, st.status, bn.beneficiario FROM tbl_gasto gt INNER JOIN tbl_segmento sg ON gt.id_segmento = sg.id INNER JOIN tbl_status st ON gt.id_status = st.id INNER JOIN tbl_beneficiario bn ON gt.id_beneficiario = bn.id WHERE DATE_FORMAT(start, '%Y-%m-%d') >= '$inicio' AND DATE_FORMAT(start, '%Y-%m-%d') <= '$fim' AND gt.id_status = '2'"; 
+        $result = $this->db->query($sql);
+        return $result;		
+	}
+	
+	public function procuraBoletosPagos($inicio, $fim){
+        $sql = "SELECT gt.codigo_de_barras, gt.valor, sg.segmento, st.status, bn.beneficiario FROM tbl_gasto gt INNER JOIN tbl_segmento sg ON gt.id_segmento = sg.id INNER JOIN tbl_status st ON gt.id_status = st.id INNER JOIN tbl_beneficiario bn ON gt.id_beneficiario = bn.id WHERE DATE_FORMAT(start, '%Y-%m-%d') >= '$inicio' AND DATE_FORMAT(start, '%Y-%m-%d') <= '$fim' AND gt.id_status = '4'"; 
+        $result = $this->db->query($sql);
+        return $result;		
+	}
+
+	public function procuraBoletosVencidos($inicio, $fim){
+        $sql = "SELECT gt.codigo_de_barras, gt.valor, sg.segmento, st.status, bn.beneficiario FROM tbl_gasto gt INNER JOIN tbl_segmento sg ON gt.id_segmento = sg.id INNER JOIN tbl_status st ON gt.id_status = st.id INNER JOIN tbl_beneficiario bn ON gt.id_beneficiario = bn.id WHERE DATE_FORMAT(start, '%Y-%m-%d') >= '$inicio' AND DATE_FORMAT(start, '%Y-%m-%d') <= '$fim' AND gt.id_status = '3'"; 
+        $result = $this->db->query($sql);
+        return $result;		
+	}
 	
 }
 

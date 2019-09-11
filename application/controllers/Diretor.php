@@ -41,7 +41,7 @@ class Diretor extends CI_Controller {
 	{
 		$dados['boletos'] = $this->Diretor_model->get_boletos_pagos()->result();
 		$this->load->view('tamplete/diretor/header');
-		$this->load->view('pages/diretor/boletospagos', $dados);
+		$this->load->view('pages/diretor/boletospagos');
 		$this->load->view('tamplete/diretor/footer');
 	}
 
@@ -49,7 +49,7 @@ class Diretor extends CI_Controller {
 	{
 		$dados['boletos'] = $this->Diretor_model->get_boletos_a_vencer()->result();
 		$this->load->view('tamplete/diretor/header');
-		$this->load->view('pages/diretor/boletos_a_vencer', $dados);
+		$this->load->view('pages/diretor/boletos_a_vencer');
 		$this->load->view('tamplete/diretor/footer');
 	}
 
@@ -57,7 +57,7 @@ class Diretor extends CI_Controller {
 	{
 		$dados['boletos'] = $this->Diretor_model->get_boletos_vencidos()->result();
 		$this->load->view('tamplete/diretor/header');
-		$this->load->view('pages/diretor/boletos_vencidos', $dados);
+		$this->load->view('pages/diretor/boletos_vencidos');
 		$this->load->view('tamplete/diretor/footer');
      }
      
@@ -302,6 +302,37 @@ class Diretor extends CI_Controller {
           //exit(); 
           redirect(site_url("diretor"));
      }
+
+     public function procuraBoletosAVencer(){
+		$inicio = $this->input->post("inicio");
+		$fim = $this->input->post("fim");
+		$data['boletos'] =  $this->Diretor_model->procuraBoletosAVencer($inicio, $fim)->result();
+		$this->load->view('tamplete/diretor/header');
+		$this->load->view('pages/diretor/boletos_a_vencer', $data);
+		$this->load->view('tamplete/diretor/footer');		 
+		 
+	 }
+
+      public function procuraBoletosPagos(){
+		$inicio = $this->input->post("inicio");
+		$fim = $this->input->post("fim");
+		$data['boletos'] =  $this->Diretor_model->procuraBoletosPagos($inicio, $fim)->result();
+		$this->load->view('tamplete/diretor/header');
+		$this->load->view('pages/diretor/boletospagos', $data);
+		$this->load->view('tamplete/diretor/footer');		 
+		 
+	 }
+	 
+	 public function procuraBoletosVencidos(){
+		$inicio = $this->input->post("inicio");
+		$fim = $this->input->post("fim");
+		$data['boletos'] =  $this->Diretor_model->procuraBoletosVencidos($inicio, $fim)->result();
+		$this->load->view('tamplete/diretor/header');
+		$this->load->view('pages/diretor/boletos_vencidos', $data);
+		$this->load->view('tamplete/diretor/footer');		 
+		 
+	 }		 
+     	
 }
 
 ?>

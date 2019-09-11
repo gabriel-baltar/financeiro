@@ -54,10 +54,10 @@
 							required></textarea>
 					</div>
 
-					<div class="form-group ml-3">
+					<!--<div class="form-group ml-3">
 						<label for="contrato">Adicionar Contrato</label>
 						<input type="file" class="form-control-file" id="contrato">
-					</div>
+					</div>-->
 
 				</div>
 

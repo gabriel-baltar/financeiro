@@ -52,12 +52,12 @@
 				<li>
 					<a href="<?=base_url('diretor/boletos_vencidos');?>" class="">Boletos Vencidos</a>
 				</li>
-				<li>
+				<!--<li>
 					<a href="<?=base_url('#');?>" class="">Contas a Receber</a>
 				</li>
 				<li>
 					<a href="<?=base_url('#');?>" class="">Relatórios</a>
-				</li>
+				</li>-->
 			</ul>
 		</nav>
 
