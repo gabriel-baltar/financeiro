@@ -39,12 +39,21 @@ class Supervisor extends CI_Controller {
 
 	public function boletosPagos()
 	{    
+<<<<<<< HEAD
         $dados['boletos'] = $this->Supervisor_model->get_boletos_pagos()->result();
 		$this->load->view('tamplete/supervisor/header');
 		$this->load->view('pages/supervisor/boletospagos');
         $this->load->view('tamplete/supervisor/footer');
 		//$this->load->view('pages/supervisor/boletospagos');
         //$this->load->view('tamplete/supervisor/footer');
+=======
+          $dados['boletos'] = $this->Supervisor_model->get_boletos_pagos()->result();
+		$this->load->view('tamplete/supervisor/header');
+		$this->load->view('pages/supervisor/boletospagos');
+          $this->load->view('tamplete/supervisor/footer');
+		//$this->load->view('pages/supervisor/boletospagos');
+          //$this->load->view('tamplete/supervisor/footer');
+>>>>>>> 7d5554195292256960dda79d84df1ce80e74404f
      }
 
      /*public function resultado()
