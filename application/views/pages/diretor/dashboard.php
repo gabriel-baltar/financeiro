@@ -113,17 +113,18 @@
 				<div class="col-sm-6">
 					<div class="card">
 						<div class="card-body">
-							<h5 class="card-title">Contas a Receber da Semana</h5>
+							<h5 class="card-title">Contas Pagas da Semana</h5>
 							<canvas id="myChart3"></canvas>
 							<script>
+								var cData = JSON.parse('<?php echo $chart_pago_semana;?>');
 								var ctx = document.getElementById('myChart3');
 								var myChart3 = new Chart(ctx, {
 									type: 'bar',
 									data: {
-										labels: ['Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul'],
+										labels: cData.dia,
 										datasets: [{
-											label: 'Remover',
-											data: [12, 19, 3, 5, 2, 3],
+											label: '',
+											data: cData.totalPagoSemana,
 											backgroundColor: [
 												'rgba(255, 99, 132, 0.2)',
 												'rgba(54, 162, 235, 0.2)',
@@ -161,17 +162,18 @@
 				<div class="col-sm-6 mb-5">
 					<div class="card">
 						<div class="card-body">
-							<h5 class="card-title">Contas a Receber do Mês</h5>
+							<h5 class="card-title">Contas Pagas do Mês</h5>
 							<canvas id="myChart4"></canvas>
 							<script>
+								var cData = JSON.parse('<?php echo $chart_pago_mes;?>');
 								var ctx = document.getElementById('myChart4');
 								var myChart4 = new Chart(ctx, {
 									type: 'bar',
 									data: {
-										labels: ['Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul'],
+										labels: cData.mes,
 										datasets: [{
-											label: 'Remover',
-											data: [12, 19, 3, 5, 2, 3],
+											label: '',
+											data: cData.totalPagoMes,
 											backgroundColor: [
 												'rgba(255, 99, 132, 0.2)',
 												'rgba(54, 162, 235, 0.2)',

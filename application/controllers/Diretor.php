@@ -23,9 +23,12 @@ class Diretor extends CI_Controller {
      }
 	
 	public function convenio()
-	{
+	{    
+          $query['convenio'] = $this->Diretor_model->listarBeneficios()->result();
+          $query['servicos'] = $this->Diretor_model->listarServicos()->result();
+          $query['nome'] = $this->Diretor_model->listarEmpresas()->result();
 		$this->load->view('tamplete/diretor/header');
-		$this->load->view('pages/diretor/convenio');
+		$this->load->view('pages/diretor/convenio', $query);
 		$this->load->view('tamplete/diretor/footer');
 	}
 
@@ -41,7 +44,7 @@ class Diretor extends CI_Controller {
 	{
 		$dados['boletos'] = $this->Diretor_model->get_boletos_pagos()->result();
 		$this->load->view('tamplete/diretor/header');
-		$this->load->view('pages/diretor/boletospagos', $dados);
+		$this->load->view('pages/diretor/boletospagos');
 		$this->load->view('tamplete/diretor/footer');
 	}
 
@@ -49,7 +52,7 @@ class Diretor extends CI_Controller {
 	{
 		$dados['boletos'] = $this->Diretor_model->get_boletos_a_vencer()->result();
 		$this->load->view('tamplete/diretor/header');
-		$this->load->view('pages/diretor/boletos_a_vencer', $dados);
+		$this->load->view('pages/diretor/boletos_a_vencer');
 		$this->load->view('tamplete/diretor/footer');
 	}
 
@@ -57,7 +60,7 @@ class Diretor extends CI_Controller {
 	{
 		$dados['boletos'] = $this->Diretor_model->get_boletos_vencidos()->result();
 		$this->load->view('tamplete/diretor/header');
-		$this->load->view('pages/diretor/boletos_vencidos', $dados);
+		$this->load->view('pages/diretor/boletos_vencidos');
 		$this->load->view('tamplete/diretor/footer');
      }
      
@@ -77,8 +80,24 @@ class Diretor extends CI_Controller {
                $mes['totalMes'][] = $row->totalMes;
           }
 
+          $dados['contasPagasSemana'] = $this->Diretor_model->contasPagasSemana()->result();
+          $dia = [];
+          foreach($dados['contasPagasSemana'] as $row){
+               $dia['dia'][] = $row->dia;
+               $dia['totalPagoSemana'][] = $row->totalPagoSemana;
+          }
+
+          $dados['contasPagasMes'] = $this->Diretor_model->contasPagasMes()->result();
+          $mespago = [];
+          foreach($dados['contasPagasMes'] as $row){
+               $mespago['mes'][] = $row->mes;
+               $mespago['totalPagoMes'][] = $row->totalPagoMes;
+          }
+
           $data['chart_data'] = json_encode($data);
           $data['chart_mes'] = json_encode($mes);
+          $data['chart_pago_semana'] = json_encode($dia);
+		$data['chart_pago_mes'] = json_encode($mespago);
 		$this->load->view('tamplete/Diretor/header');
 		$this->load->view('pages/Diretor/dashboard', $data);
 		$this->load->view('tamplete/Diretor/footer');
@@ -164,7 +183,6 @@ class Diretor extends CI_Controller {
                $end_format = $enddt->format('Y-m-d H:i:s');
 
                $events = $this->Diretor_model->get_events($start_format, $end_format);
-
                $data_events = array();
 
                foreach($events->result() as $r) {
@@ -177,9 +195,11 @@ class Diretor extends CI_Controller {
                          "end" => $r->end,
                          "start" => "$r->start",
                          "title" => $r->segmento,
+                         "title" => $r->segmento.": R$ ".number_format($r->valor, 2, ',', '.'),
                          "id_segmento" => $r->id_segmento,
                          "id_status" => $r->id_status,
-                         "id_beneficiario" => $r->id_beneficiario
+                         "beneficiario" => $r->beneficiario,
+                         "totalPagoDia" => number_format($r->totalPagoDia, 2, ',', '.')
 
                     );
                }
@@ -194,7 +214,7 @@ class Diretor extends CI_Controller {
           /* Our calendar data */
           $id_segmento = $this->input->post("add_id_segmento", TRUE);
           $id_status = $this->input->post("add_id_status", TRUE);
-          $id_beneficiario = $this->input->post("add_id_beneficiario", TRUE);
+          $beneficiario = $this->input->post("add_beneficiario", TRUE);
           $valor = $this->input->post("add_valor", TRUE);
           $codigo_de_barras = $this->input->post("add_codigo", TRUE);
           $obs = $this->input->post("add_obs", TRUE);
@@ -222,7 +242,7 @@ class Diretor extends CI_Controller {
           $this->Diretor_model->add_event(array(
                "id_segmento" => $id_segmento,
                "id_status" => $id_status,
-               "id_beneficiario" => $id_beneficiario,
+               "beneficiario" => $beneficiario,
                "valor" => str_replace(",",".",str_replace(".","",$valor)),
                "codigo_de_barras" => $codigo_de_barras,
                "obs" => $obs,
@@ -253,7 +273,7 @@ class Diretor extends CI_Controller {
           /* Our calendar data */
           $id_segmento = $this->input->post("id_segmento", TRUE);
           $id_status = $this->input->post("id_status", TRUE);
-          $id_beneficiario = $this->input->post("id_beneficiario", TRUE);
+          $beneficiario = $this->input->post("beneficiario", TRUE);
           $valor = $this->input->post("valor", TRUE);
           $codigo_de_barras = $this->input->post("codigo", TRUE);
           $obs = $this->input->post("obs", TRUE);
@@ -286,7 +306,7 @@ class Diretor extends CI_Controller {
                $this->Diretor_model->update_event($id, array(
                     "id_segmento" => $id_segmento,
                     "id_status" => $id_status,
-                    "id_beneficiario" => $id_beneficiario,
+                    "beneficiario" => $beneficiario,
                     "valor" => $valor,
                     "codigo_de_barras" => $codigo_de_barras,
                     "obs" => $obs,
@@ -302,6 +322,37 @@ class Diretor extends CI_Controller {
           //exit(); 
           redirect(site_url("diretor"));
      }
+
+     public function procuraBoletosAVencer(){
+		$inicio = $this->input->post("inicio");
+		$fim = $this->input->post("fim");
+		$data['boletos'] =  $this->Diretor_model->procuraBoletosAVencer($inicio, $fim)->result();
+		$this->load->view('tamplete/diretor/header');
+		$this->load->view('pages/diretor/boletos_a_vencer', $data);
+		$this->load->view('tamplete/diretor/footer');		 
+		 
+	 }
+
+      public function procuraBoletosPagos(){
+		$inicio = $this->input->post("inicio");
+		$fim = $this->input->post("fim");
+		$data['boletos'] =  $this->Diretor_model->procuraBoletosPagos($inicio, $fim)->result();
+		$this->load->view('tamplete/diretor/header');
+		$this->load->view('pages/diretor/boletospagos', $data);
+		$this->load->view('tamplete/diretor/footer');		 
+		 
+	 }
+	 
+	 public function procuraBoletosVencidos(){
+		$inicio = $this->input->post("inicio");
+		$fim = $this->input->post("fim");
+		$data['boletos'] =  $this->Diretor_model->procuraBoletosVencidos($inicio, $fim)->result();
+		$this->load->view('tamplete/diretor/header');
+		$this->load->view('pages/diretor/boletos_vencidos', $data);
+		$this->load->view('tamplete/diretor/footer');		 
+		 
+	 }		 
+     	
 }
 
 ?>

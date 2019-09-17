@@ -55,9 +55,9 @@
 				<!--<li>
 					<a href="<?=base_url('supervisor/contareceber');?>" class="">Contas a Receber</a>
 				</li>-->
-				<li>
+				<!--<li>
 					<a href="<?=base_url('supervisor/relatorios');?>" class="">Relatórios</a>
-				</li>
+				</li>-->
 			</ul>
 		</nav>
 
@@ -85,11 +85,10 @@
 						</div>
 					</nav>
 
-					<div id="calendar"></div>
+					<div id="calendar">
 						<!--Modais-->
 						<?php echo require('modal_add.php');?>
 						<?php echo require('modal_edit.php');?>
-						
 						<!--Modais-->
 
 						<!--Calendario Brasileiro-->
@@ -111,7 +110,7 @@
 									eventSources: [{
 										events: function (start, end, timezone, callback) {
 											$.ajax({
-												url: '<?=base_url("supervisor/get_events");?>',
+												url: '<?php echo base_url() ?>supervisor/get_events',
 												dataType: 'json',
 												data: {
 													// our hypothetical feed requires UNIX timestamps
