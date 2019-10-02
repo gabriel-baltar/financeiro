@@ -13,12 +13,9 @@
 										
 											<div class="form-row">
 												<div class="col-md-6">
-													<label for="id_beneficiario">Beneficiário</label>
-													<select id="id_beneficiario" name="id_beneficiario" class="form-control" required>
-														<?php foreach($beneficiario as $b){; ?>
-														<option value="<?=$b->id;?>"><?=$b->beneficiario;?></option>
-														<?php }; ?>
-													</select>
+													<label for="beneficiario">Beneficiário</label>
+													<input type="text" class="form-control" name="beneficiario" id="beneficiario"
+														placeholder="Beneficiário" required>
 												</div>
 												<div class="col-md-6">
 													<label for="status">Status</label>
@@ -71,16 +68,16 @@
 												<table class="table table-hover">
 													<thead>
 														<tr>
-															<th scope="col">Total do Dia</th>
+															<th scope="col">Total Pago Dia</th>
 															<th scope="col">Débito em aberto (Mês)</th>
-															<th scope="col">Total do Mês</th>
+															<th scope="col">Total Pago Mês</th>
 														</tr>
 													</thead>
 													<tbody>
 														<tr>
-															<td><span id="totalPagoDia"></span></td>
-															<td><?=$debitosMes['0']->valor;?></td>
-															<td><?=$pagoMes['0']->valor;?></td>
+															<td>R$ <span id="totalPagoDia"></span></td>
+															<td>R$ <?=number_format($debitosMes['0']->valor, 2, ',', '.');?></td>
+															<td>R$ <?=number_format($pagoMes['0']->valor, 2, ',', '.');?></td>
 														</tr>
 													</tbody>
 												</table>

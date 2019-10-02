@@ -2,9 +2,8 @@
 	<div class="card">
 		<h3 class="card-header text-dark bg-light">
 			Boletos Vencidos
-		</h3>
+			</h3>
 		<div class="container">
-		
 		<form method="post" class="col-8 offset-2" action="<?=base_url("supervisor/procuraBoletosVencidos");?>">
 			<h3 class="text-center mt-5">Buscar por Data</h3>
 			<div class="row mb-5 mt-5">
@@ -14,6 +13,7 @@
 				</div>
 				<div class="col-4">
 					<label for="inputFim">Data Fim</label>
+
 					<input type="date" class="form-control" name="fim" placeholder="Data Fim">
 				</div>
 				<div class="col-4">
@@ -37,7 +37,6 @@
 						</tr>
 					</thead>
 					<tbody>
-
 						<?php foreach($boletos as $b){; ?>
 						<tr>
 							<td><?=$b->codigo_de_barras;?></td>
@@ -46,7 +45,8 @@
 							<td><?=$b->segmento;?></td>
 							<td><?=$b->valor;?></td>
 						</tr>
-						<?php };?>
+
+					<?php };?>
 					</tbody>
 				</table>
 			<?php } ;?>

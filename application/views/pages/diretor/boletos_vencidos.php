@@ -5,21 +5,27 @@
 		</h3>
 		<div class="container">
 
-			<form>
-				<h3 class="text-center mt-5">Buscar por Data</h3>
-				<div class="row mb-5 mt-5">
-					<div class="col ml-5">
-						<label for="inputInicio">Data Início</label>
-						<input type="text" class="form-control col-md-9" placeholder="Data Início">
-					</div>
-					<div class="col">
-						<label for="inputFim">Data Fim</label>
-						<input type="text" class="form-control col-md-9" placeholder="Data Fim">
-					</div>
+		<form method="post" class="col-8 offset-2" action="<?=base_url("diretor/procuraBoletosVencidos");?>">
+		<h3 class="text-center mt-5">Buscar por Data</h3>
+			<div class="row mb-5 mt-5">
+				<div class="col-4">
+					<label for="inputInicio">Data Início</label>
+					<input type="date" class="form-control" name="inicio" placeholder="Data Início">
 				</div>
+				<div class="col-4">
+					<label for="inputFim">Data Fim</label>
+
+					<input type="date" class="form-control" name="fim" placeholder="Data Fim">
+				</div>
+				<div class="col-4">
+					<label>&nbsp</label>
+					<button type="submit" class="form-control btn btn-success">Buscar</button>	
+				</div>		
+			</div>
 			</form>
 
 			<div class="row">
+			<?php if(isset($boletos)){ ;?>
 				<table class="table table-hover row-12">
 					<thead>
 						<tr>
@@ -42,5 +48,6 @@
 					<?php };?>
 					</tbody>
 				</table>
+			<?php } ;?>
 			</div>
 		</div>

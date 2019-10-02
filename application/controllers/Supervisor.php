@@ -11,20 +11,20 @@ class Supervisor extends CI_Controller {
 	
 	public function index()
      {    
-          $dados['segmento'] = $this->Supervisor_model->get_segmento()->result();
-          $dados['status'] = $this->Supervisor_model->get_status()->result();
-          $dados['beneficiario'] = $this->Supervisor_model->get_beneficiario()->result();
-          $dados['boletos'] = $this->Supervisor_model->get_boletos_pagos()->result();
-          $dados['debitosMes'] = $this->Supervisor_model->boletosAvencerMes()->result();
-          $dados['pagoMes'] = $this->Supervisor_model->boletosPagosMes()->result();
-          $this->load->view("calendar/index.php", $dados); 
+		$dados['segmento'] = $this->Supervisor_model->get_segmento()->result();
+		$dados['status'] = $this->Supervisor_model->get_status()->result();
+		$dados['beneficiario'] = $this->Supervisor_model->get_beneficiario()->result();
+		$dados['boletos'] = $this->Supervisor_model->get_boletos_pagos()->result();
+		$dados['debitosMes'] = $this->Supervisor_model->boletosAvencerMes()->result();
+		$dados['pagoMes'] = $this->Supervisor_model->boletosPagosMes()->result();
+		$this->load->view("calendar/index.php", $dados); 
      }
 
 	public function convenio()
 	{    
-          $query['convenio'] = $this->Supervisor_model->listarBeneficios()->result();
-          $query['servicos'] = $this->Supervisor_model->listarServicos()->result();
-          $query['nome'] = $this->Supervisor_model->listarEmpresas()->result();
+		$query['convenio'] = $this->Supervisor_model->listarBeneficios()->result();
+		$query['servicos'] = $this->Supervisor_model->listarServicos()->result();
+		$query['nome'] = $this->Supervisor_model->listarEmpresas()->result();
 		$this->load->view('tamplete/supervisor/header');
 		$this->load->view('pages/supervisor/convenio', $query);
 		$this->load->view('tamplete/supervisor/footer');
@@ -38,19 +38,19 @@ class Supervisor extends CI_Controller {
 	}
 
 	public function boletosPagos()
-	{
+	{    
+        $dados['boletos'] = $this->Supervisor_model->get_boletos_pagos()->result();
 		$this->load->view('tamplete/supervisor/header');
 		$this->load->view('pages/supervisor/boletospagos');
         $this->load->view('tamplete/supervisor/footer');
+		//$this->load->view('pages/supervisor/boletospagos');
+        //$this->load->view('tamplete/supervisor/footer');
      }
 
-     public function resultado()
-	{
-		$dados['listagem'] = $this->Supervisor_model->busca($_POST)->result();
-		$this->load->view('tamplete/supervisor/header');
-		$this->load->view('pages/supervisor/resultado', $dados);
-		$this->load->view('tamplete/supervisor/footer');
-     }
+     /*public function resultado()
+          $this->load->view('tamplete/supervisor/footer');
+
+     }*/
      
 	
 	public function boletos_a_vencer()
@@ -60,7 +60,7 @@ class Supervisor extends CI_Controller {
 		$this->load->view('tamplete/supervisor/footer');
 	}
 
-	public function boletos_Vencidos()
+     public function boletos_Vencidos()
 	{
 		$this->load->view('tamplete/supervisor/header');
 		$this->load->view('pages/supervisor/boletos_vencidos');
@@ -111,10 +111,10 @@ class Supervisor extends CI_Controller {
                $mespago['totalPagoMes'][] = $row->totalPagoMes;
           }
 
-          $data['chart_data'] = json_encode($data);
-          $data['chart_mes'] = json_encode($mes);
-          $data['chart_pago_semana'] = json_encode($dia);
-          $data['chart_pago_mes'] = json_encode($mespago);
+		$data['chart_data'] = json_encode($data);
+		$data['chart_mes'] = json_encode($mes);
+		$data['chart_pago_semana'] = json_encode($dia);
+		$data['chart_pago_mes'] = json_encode($mespago);
 		$this->load->view('tamplete/supervisor/header');
 		$this->load->view('pages/supervisor/dashboard', $data);
 		$this->load->view('tamplete/supervisor/footer');
@@ -261,21 +261,20 @@ class Supervisor extends CI_Controller {
 
               $eventos = $events->result();
             
-               
               foreach($events->result() as $r) {
 
                $data_events[] = array(
                     "id" => $r->id,
-                    "valor" => $r->valor,
+                    "valor" => number_format($r->valor, 2, ',', '.'),
                     "codigo_de_barras" => $r->codigo_de_barras,
                     "obs" => $r->obs,
                     "end" => $r->end,
-                    "start" => "$r->start",
-                    "title" => $r->segmento,
+                    "start" => $r->start,
+                    "title" => $r->segmento.": R$ ".number_format($r->valor, 2, ',', '.'),
                     "id_segmento" => $r->id_segmento,
                     "id_status" => $r->id_status,
-                    "id_beneficiario" => $r->id_beneficiario,
-                    "totalPagoDia" => $r->totalPagoDia
+                    "beneficiario" => $r->beneficiario,
+                    "totalPagoDia" => number_format($r->totalPagoDia, 2, ',', '.')
 
                );
           }
@@ -291,7 +290,7 @@ class Supervisor extends CI_Controller {
           /* Our calendar data */
           $id_segmento = $this->input->post("add_id_segmento", TRUE);
           $id_status = $this->input->post("add_id_status", TRUE);
-          $id_beneficiario = $this->input->post("add_id_beneficiario", TRUE);
+          $beneficiario = $this->input->post("add_beneficiario", TRUE);
           $valor = $this->input->post("add_valor", TRUE);
           $codigo_de_barras = $this->input->post("add_codigo", TRUE);
           $obs = $this->input->post("add_obs", TRUE);
@@ -319,7 +318,7 @@ class Supervisor extends CI_Controller {
           $this->Supervisor_model->add_event(array(
                "id_segmento" => $id_segmento,
                "id_status" => $id_status,
-               "id_beneficiario" => $id_beneficiario,
+               "beneficiario" => $beneficiario,
                "valor" => str_replace(",",".",str_replace(".","",$valor)),
                "codigo_de_barras" => $codigo_de_barras,
                "obs" => $obs,
@@ -350,7 +349,7 @@ class Supervisor extends CI_Controller {
           /* Our calendar data */
           $id_segmento = $this->input->post("id_segmento", TRUE);
           $id_status = $this->input->post("id_status", TRUE);
-          $id_beneficiario = $this->input->post("id_beneficiario", TRUE);
+          $beneficiario = $this->input->post("beneficiario", TRUE);
           $valor = $this->input->post("valor", TRUE);
           $codigo_de_barras = $this->input->post("codigo", TRUE);
           $obs = $this->input->post("obs", TRUE);
@@ -383,8 +382,8 @@ class Supervisor extends CI_Controller {
                $this->Supervisor_model->update_event($id, array(
                     "id_segmento" => $id_segmento,
                     "id_status" => $id_status,
-                    "id_beneficiario" => $id_beneficiario,
-                    "valor" => $valor,
+                    "beneficiario" => $beneficiario,
+                    "valor" => str_replace(",",".",str_replace(".","",$valor)),
                     "codigo_de_barras" => $codigo_de_barras,
                     "obs" => $obs,
                     "start" => $start,

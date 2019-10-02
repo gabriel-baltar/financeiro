@@ -5,68 +5,32 @@
 		</h3>
 		<div class="container">
 			<div class="row">
-				<table class="table table-hover">
-					<thead>
-						<tr>
-							<th scope="col">Empresa</th>
-							<th scope="col">Porcentagem</th>
-							<th scope="col">Telefone</th>
-							<th scope="col">Duração do Contrato</th>
-							<th scope="col">Tipo de Serviço</th>
-							<th scope="col">Todas as Informações</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>Academia</td>
-							<td align="center">50%</td>
-							<td>(21) 99252-3567</td>
-							<td align="center">1 ano</td>
-							<td align="center">Funcional</td>
-							<td align="center"><button type="button" data-toggle="modal" data-target=".bd-example-modal-lg"
-									class="btn btn-secondary"><i class="fas fa-search"></i></button></td>
-						</tr>
-					</tbody>
-					<tbody>
-						<tr>
-							<td>Academia</td>
-							<td align="center">50%</td>
-							<td>(21) 99252-3567</td>
-							<td align="center">1 ano</td>
-							<td align="center">Funcional</td>
-							<td align="center"><button type="button" data-toggle="modal" data-target=".bd-example-modal-lg"
-									class="btn btn-secondary"><i class="fas fa-search"></i></button></td>
-						</tr>
-					</tbody>
-					<tbody>
-						<tr>
-							<td>Academia</td>
-							<td align="center">50%</td>
-							<td>(21) 99252-3567</td>
-							<td align="center">1 ano</td>
-							<td align="center">Funcional</td>
-							<td align="center"><button type="button" data-toggle="modal" data-target=".bd-example-modal-lg"
-									class="btn btn-secondary"><i class="fas fa-search"></i></button></td>
-						</tr>
-					</tbody>
-					<tbody>
-						<tr>
-							<td>Academia</td>
-							<td align="center">50%</td>
-							<td>(21) 99252-3567</td>
-							<td align="center">1 ano</td>
-							<td align="center">Funcional</td>
-							<td align="center"><button type="button" data-toggle="modal" data-target=".bd-example-modal-lg"
-									class="btn btn-secondary"><i class="fas fa-search"></i></button></td>
-						</tr>
-					</tbody>
-				</table>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th scope="col">Nome da Empresa</th>
+						<th scope="col">Porcentagem do Desconto</th>
+						<th scope="col">Telefone</th>
+						<th scope="col">Status</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach($convenio as $co){;?>
+					<tr>
+						<th><?=$co->empresa;?> </th>
+						<td><?=$co->porcentagem;?></td>
+						<td><?=$co->telefone;?></td>
+						<td><?=$co->status;?></td>
+					</tr>
+					<?php } ;?>
+				</tbody>
+			</table>
 			</div>
 		</div>
 	</div>
 </div>
 
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+<!--<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
 	aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
@@ -124,4 +88,4 @@
 			</form>
 		</div>
 	</div>
-</div>
+</div>-->

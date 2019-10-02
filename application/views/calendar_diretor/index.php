@@ -52,12 +52,12 @@
 				<li>
 					<a href="<?=base_url('diretor/boletos_vencidos');?>" class="">Boletos Vencidos</a>
 				</li>
-				<li>
+				<!--<li>
 					<a href="<?=base_url('#');?>" class="">Contas a Receber</a>
 				</li>
 				<li>
 					<a href="<?=base_url('#');?>" class="">Relatórios</a>
-				</li>
+				</li>-->
 			</ul>
 		</nav>
 
@@ -107,7 +107,7 @@
 									eventSources: [{
 										events: function (start, end, timezone, callback) {
 											$.ajax({
-												url: '<?php echo base_url() ?>diretor/get_events',
+												url: '<?=base_url("diretor/get_events");?>',
 												dataType: 'json',
 												data: {
 													// our hypothetical feed requires UNIX timestamps
@@ -117,6 +117,10 @@
 												success: function (msg) {
 													var events = msg.events;
 													callback(events);
+													for(i in events){
+														var dt = document.querySelectorAll(".fc-time");
+														dt[i].style.display = 'none';
+													}
 												}
 											});
 										}
@@ -132,10 +136,12 @@
 										$('#codigo').val(event.codigo_de_barras);
 										$('#obs').val(event.obs);
 										$('#id').val(event.id);
-										document.getElementById("id_beneficiario").value = event.id_beneficiario;
+										$('#beneficiario').val(event.beneficiario);
+										//document.getElementById("id_beneficiario").value = event.id_beneficiario;
 										document.getElementById("id_status").value = event.id_status;
 										document.getElementById("id_segmento").value = event.id_segmento;
-										document.getElementById("edit_data").value = event.start._i;										
+										document.getElementById("edit_data").value = event.start._i;
+										document.getElementById("totalPagoDia").innerHTML = event.totalPagoDia;										
 										$('#editModal').modal();
 										console.log(event);										
 									},

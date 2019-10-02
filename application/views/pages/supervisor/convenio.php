@@ -48,16 +48,16 @@
 							class="form-control btn btn-primary btn-sm mt-4"><i class="fas fa-plus"></i></button>
 					</div>
 
-					<div class="form-group col-md-6 ml-4">
+					<div class="form-group col-md-6 ml-3">
 						<label for="obs">Observações</label>
 						<textarea class="form-control" name="obs" id="obs" rows="3" placeholder="Observações"
 							required></textarea>
 					</div>
 
-					<div class="form-group ml-3">
+					<!--<div class="form-group ml-3">
 						<label for="contrato">Adicionar Contrato</label>
 						<input type="file" class="form-control-file" id="contrato">
-					</div>
+					</div>-->
 
 				</div>
 
