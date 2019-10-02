@@ -100,7 +100,15 @@ class Supervisor_model extends CI_Model{
     {
         //$sql = "SELECT DATE_FORMAT(`start`,'%d/%m/%Y') AS data_formatada FROM `tbl_gasto`"; 
         //return $this->db->where("start >=", $start)->where("end <=", $end)->get("tbl_gasto");
+<<<<<<< HEAD
         $this->db->select('tbl_segmento.segmento, tbl_gasto.beneficiario, tbl_gasto.start, tbl_gasto.end, tbl_status.status, tbl_gasto.valor, tbl_gasto.codigo_de_barras, tbl_gasto.start, tbl_gasto.end');
+=======
+<<<<<<< HEAD
+        $this->db->select('tbl_segmento.segmento, tbl_gasto.beneficiario, tbl_gasto.start, tbl_gasto.end, tbl_status.status, tbl_gasto.valor, tbl_gasto.codigo_de_barras, tbl_gasto.start, tbl_gasto.end');
+=======
+        $this->db->select('tbl_segmento.segmento, tbl_beneficiario.beneficiario, tbl_gasto.start, tbl_gasto.end, tbl_status.status, tbl_gasto.valor, tbl_gasto.codigo_de_barras, tbl_gasto.start, tbl_gasto.end');
+>>>>>>> 7d5554195292256960dda79d84df1ce80e74404f
+>>>>>>> 2410a4dbad6dbc71bf78dbe78d15e895c90fa40b
         $this->db->from('tbl_gasto');
         //$this->db->join('tbl_beneficiario', 'tbl_beneficiario.id = tbl_gasto.beneficiario');
         $this->db->join('tbl_status', 'tbl_status.id = tbl_gasto.id_status');
@@ -118,7 +126,15 @@ class Supervisor_model extends CI_Model{
     public function get_boletos_a_vencer()
     {
         //return $this->db->where("start >=", $start)->where("end <=", $end)->get("tbl_gasto");
+<<<<<<< HEAD
         $this->db->select('tbl_segmento.segmento, tbl_gasto.beneficiario, tbl_status.status, tbl_gasto.valor, tbl_gasto.codigo_de_barras, DATE_FORMAT(`start`,`%d/%m/%Y`) AS data_formatada FROM `tbl_gasto`');
+=======
+<<<<<<< HEAD
+        $this->db->select('tbl_segmento.segmento, tbl_gasto.beneficiario, tbl_status.status, tbl_gasto.valor, tbl_gasto.codigo_de_barras, DATE_FORMAT(`start`,`%d/%m/%Y`) AS data_formatada FROM `tbl_gasto`');
+=======
+        $this->db->select('tbl_segmento.segmento, tbl_beneficiario.beneficiario, tbl_status.status, tbl_gasto.valor, tbl_gasto.codigo_de_barras, DATE_FORMAT(`start`,`%d/%m/%Y`) AS data_formatada FROM `tbl_gasto`');
+>>>>>>> 7d5554195292256960dda79d84df1ce80e74404f
+>>>>>>> 2410a4dbad6dbc71bf78dbe78d15e895c90fa40b
         $this->db->from('tbl_gasto');
         //$this->db->join('tbl_beneficiario', 'tbl_beneficiario.id = tbl_gasto.beneficiario');
         $this->db->join('tbl_status', 'tbl_status.id = tbl_gasto.id_status');

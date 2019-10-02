@@ -52,6 +52,15 @@
 				<li>
 					<a href="<?=base_url('supervisor/boletos_vencidos');?>" class="">Boletos Vencidos</a>
 				</li>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+				<!--<li>
+					<a href="<?=base_url('supervisor/contareceber');?>" class="">Contas a Receber</a>
+				</li>-->
+>>>>>>> 7d5554195292256960dda79d84df1ce80e74404f
+>>>>>>> 2410a4dbad6dbc71bf78dbe78d15e895c90fa40b
 				<!--<li>
 					<a href="<?=base_url('supervisor/contareceber');?>" class="">Contas a Receber</a>
 				</li>-->
